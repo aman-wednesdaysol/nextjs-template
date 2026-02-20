@@ -8,6 +8,7 @@ import { combineReducers } from 'redux';
 import repos from './containers/Repos/reducer';
 import info from './containers/Info/reducer';
 import auth from './containers/Auth/reducer';
+import music from './containers/Music/reducer';
 
 enableAllPlugins();
 
@@ -19,7 +20,8 @@ export default function createReducer(injectedReducer = {}) {
     ...injectedReducer,
     repos,
     info,
-    auth
+    auth,
+    music
   });
 
   return rootReducer;

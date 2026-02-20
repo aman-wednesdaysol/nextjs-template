@@ -9,6 +9,12 @@ jest.mock('@components/ThemeToggle', () => {
   return Mock
 })
 
+jest.mock('@components/LogoutButton', () => {
+  const Mock = () => <div data-testid='logout-button' />
+  Mock.displayName = 'MockLogoutButton'
+  return Mock
+})
+
 jest.mock('@components/AudioPlayer', () => {
   const PT = require('prop-types')
   const MockPlayer = ({ onNext, onPrev }) => (

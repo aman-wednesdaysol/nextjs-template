@@ -46,6 +46,12 @@ export const EmptyState = styled.div`
   font-size: 1rem;
 `;
 
+export const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+`;
+
 export const LoadingSpinner = styled.div`
   width: 36px;
   height: 36px;

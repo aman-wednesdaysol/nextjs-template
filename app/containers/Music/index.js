@@ -10,11 +10,13 @@ import SongList from '@components/SongList';
 import AudioPlayer from '@components/AudioPlayer';
 import If from '@components/If';
 import ThemeToggle from '@components/ThemeToggle';
+import LogoutButton from '@components/LogoutButton';
 import {
   MusicPageWrapper,
   MusicPageContent,
   PageHeader,
   PageTitle,
+  HeaderActions,
   EmptyState,
   LoadingSpinner
 } from '@components/styled/musicPage';
@@ -57,7 +59,10 @@ export function Music({ songs, loading, currentSong, dispatchSearch, dispatchSet
       <MusicPageContent>
         <PageHeader>
           <PageTitle>MUSICA</PageTitle>
-          <ThemeToggle />
+          <HeaderActions>
+            <ThemeToggle />
+            <LogoutButton />
+          </HeaderActions>
         </PageHeader>
         <SearchBar value={searchValue} onChange={handleSearch} loading={loading} />
         <If condition={loading}>

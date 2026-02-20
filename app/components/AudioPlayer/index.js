@@ -1,5 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  StepBackwardFilled,
+  PlayCircleFilled,
+  PauseCircleFilled,
+  StepForwardFilled,
+  SoundFilled
+} from '@ant-design/icons';
 import { useAudioPlayer } from './useAudioPlayer';
 import {
   PlayerContainer,
@@ -10,6 +17,7 @@ import {
   PlayerControls,
   ControlButton,
   ProgressSlider,
+  VolumeGroup,
   VolumeSlider
 } from '@components/styled/playerBar';
 
@@ -29,13 +37,13 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
       </PlayerTrackInfo>
       <PlayerControls>
         <ControlButton data-testid="prev-btn" onClick={onPrev}>
-          PREV
+          <StepBackwardFilled />
         </ControlButton>
         <ControlButton data-testid="play-btn" primary onClick={player.togglePlay}>
-          {player.isPlaying ? 'PAUSE' : 'PLAY'}
+          {player.isPlaying ? <PauseCircleFilled /> : <PlayCircleFilled />}
         </ControlButton>
         <ControlButton data-testid="next-btn" onClick={onNext}>
-          NEXT
+          <StepForwardFilled />
         </ControlButton>
       </PlayerControls>
       <ProgressSlider
@@ -46,15 +54,18 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
         value={player.currentTime}
         onChange={(e) => player.seek(Number(e.target.value))}
       />
-      <VolumeSlider
-        data-testid="volume-slider"
-        type="range"
-        min={0}
-        max={1}
-        step={0.05}
-        value={player.volume}
-        onChange={(e) => player.setVolume(Number(e.target.value))}
-      />
+      <VolumeGroup>
+        <SoundFilled data-testid="volume-icon" style={{ color: '#e84393', fontSize: '1rem' }} />
+        <VolumeSlider
+          data-testid="volume-slider"
+          type="range"
+          min={0}
+          max={1}
+          step={0.05}
+          value={player.volume}
+          onChange={(e) => player.setVolume(Number(e.target.value))}
+        />
+      </VolumeGroup>
     </PlayerContainer>
   );
 };

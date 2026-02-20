@@ -61,20 +61,20 @@ export const ControlButton = styled.button`
   background: none;
   border: none;
   color: ${C.text};
-  font-family: 'Syne', sans-serif;
-  font-size: ${(p) => (p.primary ? '1rem' : '0.75rem')};
-  font-weight: 600;
+  font-size: ${(p) => (p.primary ? '1.6rem' : '1.1rem')};
   cursor: pointer;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
   transition: all 0.2s ease;
-  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: ${(p) => (p.primary ? `linear-gradient(135deg, ${C.accent}, ${C.pink})` : 'transparent')};
   &:hover {
-    transform: scale(1.08);
+    transform: scale(1.15);
   }
   &:active {
-    transform: scale(0.96);
+    transform: scale(0.94);
   }
 `;
 
@@ -94,6 +94,13 @@ export const ProgressSlider = styled.input`
     background: ${C.accent};
     cursor: pointer;
   }
+`;
+
+export const VolumeGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
 `;
 
 export const VolumeSlider = styled.input`

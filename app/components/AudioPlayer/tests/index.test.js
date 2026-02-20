@@ -62,6 +62,7 @@ describe('<AudioPlayer />', () => {
       <AudioPlayer currentSong={mockSong} onNext={mockNext} onPrev={mockPrev} />
     )
     expect(getByTestId('progress-slider')).toBeTruthy()
+    expect(getByTestId('volume-icon')).toBeTruthy()
     expect(getByTestId('volume-slider')).toBeTruthy()
   })
 })

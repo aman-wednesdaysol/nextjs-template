@@ -85,7 +85,7 @@ describe('<Library /> container', () => {
   it('should render navigation links', () => {
     const { getByTestId } = renderProvider(<Library {...defaultProps} />)
     expect(getByTestId('nav-search')).toBeTruthy()
-    expect(getByTestId('nav-library')).toBeTruthy()
+    expect(getByTestId('nav-favorites')).toBeTruthy()
   })
 
   it('should fetch library on mount', () => {

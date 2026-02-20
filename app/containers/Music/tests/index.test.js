@@ -94,7 +94,7 @@ describe('<Music /> container', () => {
   it('should render navigation links', () => {
     const { getByTestId } = renderProvider(<Music {...defaultProps} />)
     expect(getByTestId('nav-search')).toBeTruthy()
-    expect(getByTestId('nav-library')).toBeTruthy()
+    expect(getByTestId('nav-favorites')).toBeTruthy()
   })
 
   it('should render the search bar', () => {

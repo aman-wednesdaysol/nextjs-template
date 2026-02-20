@@ -7,7 +7,7 @@ export const PlayerContainer = styled.div`
   left: 0;
   right: 0;
   height: 88px;
-  background: rgba(22, 22, 34, 0.95);
+  background: var(--musica-cardBg);
   backdrop-filter: blur(16px);
   border-top: 1px solid ${C.border};
   display: flex;

@@ -59,7 +59,7 @@ export function Music(props) {
           <PageTitle>MUSICA</PageTitle>
           <NavGroup>
             <NavLink href="/" label="Search" isActive />
-            <NavLink href="/library" label="Library" />
+            <NavLink href="/library" label="Favorites" />
           </NavGroup>
           <HeaderActions>
             <ThemeToggle />

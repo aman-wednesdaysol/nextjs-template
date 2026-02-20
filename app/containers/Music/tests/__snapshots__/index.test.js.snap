@@ -137,9 +137,9 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
               Search
             </a>
             <a
-              data-testid="nav-library"
+              data-testid="nav-favorites"
             >
-              Library
+              Favorites
             </a>
           </nav>
           <div

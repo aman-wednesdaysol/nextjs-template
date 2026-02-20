@@ -12,19 +12,19 @@ const apiClients = {
 
 export const getApiClient = (type = 'github') => apiClients[type];
 export const generateApiClient = (type = 'github') => {
+  if (apiClients[type]) {
+    return apiClients[type];
+  }
   switch (type) {
-    case 'github':
-      apiClients[type] = createApiClientWithTransForm(process.env.NEXT_PUBLIC_GITHUB_URL);
-      return apiClients[type];
     case 'auth':
       apiClients[type] = createApiClientWithTransForm('http://localhost:9000');
       return apiClients[type];
     case 'music':
-      apiClients[type] = createApiClientWithTransForm('http://localhost:9000');
+      apiClients[type] = createApiClientWithTransForm('http://localhost:9000', { skipRequestTransform: true });
       return apiClients[type];
     default:
-      apiClients.default = createApiClientWithTransForm(process.env.NEXT_PUBLIC_GITHUB_URL);
-      return apiClients.default;
+      apiClients[type] = createApiClientWithTransForm(process.env.NEXT_PUBLIC_GITHUB_URL);
+      return apiClients[type];
   }
 };
 
@@ -35,7 +35,7 @@ export const setAuthHeader = (type, token) => {
   }
 };
 
-export const createApiClientWithTransForm = (baseURL) => {
+export const createApiClientWithTransForm = (baseURL, options = {}) => {
   const api = create({
     baseURL,
     headers: { 'Content-Type': 'application/json' }
@@ -48,12 +48,14 @@ export const createApiClientWithTransForm = (baseURL) => {
     return response;
   });
 
-  api.addRequestTransform((request) => {
-    const { data } = request;
-    if (data) {
-      request.data = mapKeysDeep(data, (keys) => snakeCase(keys));
-    }
-    return request;
-  });
+  if (!options.skipRequestTransform) {
+    api.addRequestTransform((request) => {
+      const { data } = request;
+      if (data) {
+        request.data = mapKeysDeep(data, (keys) => snakeCase(keys));
+      }
+      return request;
+    });
+  }
   return api;
 };

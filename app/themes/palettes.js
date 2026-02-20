@@ -11,12 +11,12 @@ export const darkPalette = {
   ...shared,
   bg: '#0d0d0d',
   cardBg: '#161622',
-  inputBg: '#1e1e30',
-  border: '#2d2d44',
+  inputBg: '#d2d2db',
+  border: '#000000',
   text: '#ffffff',
-  muted: '#6c7086',
+  muted: '#d0d0d0',
   label: '#9ca0b0',
-  placeholder: '#4a4a5a',
+  placeholder: '#d9d9ea',
   surface: '#1a1a2e'
 };
 

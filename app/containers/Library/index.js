@@ -51,7 +51,7 @@ export function Library(props) {
           <PageTitle>MUSICA</PageTitle>
           <NavGroup>
             <NavLink href="/" label="Search" />
-            <NavLink href="/library" label="Library" isActive />
+            <NavLink href="/library" label="Favorites" isActive />
           </NavGroup>
           <HeaderActions>
             <ThemeToggle />

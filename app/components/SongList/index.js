@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import HeartButton from '@components/HeartButton';
+import If from '@components/If';
 import {
   SongListWrapper,
   SongCard,
@@ -10,7 +12,7 @@ import {
   SongAlbum
 } from '@components/styled/songList';
 
-const SongList = ({ songs, currentSong, onSelectSong }) => (
+const SongList = ({ songs, currentSong, onSelectSong, likedTrackIds, onToggleLike }) => (
   <SongListWrapper data-testid="song-list">
     {songs.map((song) => (
       <SongCard
@@ -25,6 +27,9 @@ const SongList = ({ songs, currentSong, onSelectSong }) => (
           <SongArtist>{song.artistName}</SongArtist>
           <SongAlbum>{song.albumName}</SongAlbum>
         </SongInfo>
+        <If condition={!!onToggleLike}>
+          <HeartButton isLiked={!!likedTrackIds[song.trackId]} onClick={() => onToggleLike(song)} />
+        </If>
       </SongCard>
     ))}
   </SongListWrapper>
@@ -33,7 +38,14 @@ const SongList = ({ songs, currentSong, onSelectSong }) => (
 SongList.propTypes = {
   songs: PropTypes.array.isRequired,
   currentSong: PropTypes.object,
-  onSelectSong: PropTypes.func.isRequired
+  onSelectSong: PropTypes.func.isRequired,
+  likedTrackIds: PropTypes.object,
+  onToggleLike: PropTypes.func
+};
+
+SongList.defaultProps = {
+  likedTrackIds: {},
+  onToggleLike: null
 };
 
 export default SongList;

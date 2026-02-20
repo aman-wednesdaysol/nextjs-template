@@ -45,6 +45,15 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.25rem;
+  margin-left: 1.5rem;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -52,13 +61,13 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
   gap: 0.6rem;
 }
 
-.emotion-5 {
+.emotion-6 {
   width: 100%;
   margin-bottom: 2rem;
   position: relative;
 }
 
-.emotion-6 {
+.emotion-7 {
   width: 100%;
   padding: 1rem 1.25rem;
   background: var(--musica-inputBg);
@@ -73,32 +82,32 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
   box-sizing: border-box;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-7::-webkit-input-placeholder {
   color: var(--musica-placeholder);
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-7::-moz-placeholder {
   color: var(--musica-placeholder);
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-7:-ms-input-placeholder {
   color: var(--musica-placeholder);
 }
 
-.emotion-6::placeholder {
+.emotion-7::placeholder {
   color: var(--musica-placeholder);
 }
 
-.emotion-6:focus {
+.emotion-7:focus {
   border-color: var(--musica-accent);
   box-shadow: 0 0 24px rgba(255, 107, 53, 0.12);
 }
 
-.emotion-6:hover:not(:focus) {
+.emotion-7:hover:not(:focus) {
   border-color: #3d3d54;
 }
 
-.emotion-6:disabled {
+.emotion-7:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -119,8 +128,22 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
           >
             MUSICA
           </h1>
-          <div
+          <nav
             class="emotion-4"
+          >
+            <a
+              data-testid="nav-search"
+            >
+              Search
+            </a>
+            <a
+              data-testid="nav-library"
+            >
+              Library
+            </a>
+          </nav>
+          <div
+            class="emotion-5"
           >
             <div
               data-testid="theme-toggle"
@@ -131,10 +154,10 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
           </div>
         </header>
         <div
-          class="emotion-5"
+          class="emotion-6"
         >
           <input
-            class="emotion-6"
+            class="emotion-7"
             data-testid="music-search-input"
             placeholder="Search songs, artists..."
             type="text"

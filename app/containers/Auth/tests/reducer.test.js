@@ -27,7 +27,6 @@ describe('Auth reducer tests', () => {
     expect(
       authReducer(state, {
         type: authTypes.REQUEST_SIGNUP,
-        name: 'Test User',
         email: 'test@test.com',
         password: 'password123'
       })

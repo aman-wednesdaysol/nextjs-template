@@ -9,6 +9,7 @@ import SearchBar from '@components/SearchBar';
 import SongList from '@components/SongList';
 import AudioPlayer from '@components/AudioPlayer';
 import If from '@components/If';
+import ThemeToggle from '@components/ThemeToggle';
 import {
   MusicPageWrapper,
   MusicPageContent,
@@ -56,6 +57,7 @@ export function Music({ songs, loading, currentSong, dispatchSearch, dispatchSet
       <MusicPageContent>
         <PageHeader>
           <PageTitle>MUSICA</PageTitle>
+          <ThemeToggle />
         </PageHeader>
         <SearchBar value={searchValue} onChange={handleSearch} loading={loading} />
         <If condition={loading}>

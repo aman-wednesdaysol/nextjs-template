@@ -10,10 +10,10 @@ exports[`<SearchBar /> should render and match the snapshot 1`] = `
 .emotion-1 {
   width: 100%;
   padding: 1rem 1.25rem;
-  background: #1e1e30;
-  border: 1.5px solid #2d2d44;
+  background: var(--musica-inputBg);
+  border: 1.5px solid var(--musica-border);
   border-radius: 12px;
-  color: #ffffff;
+  color: var(--musica-text);
   font-family: 'Outfit',sans-serif;
   font-size: 1rem;
   outline: none;
@@ -23,23 +23,23 @@ exports[`<SearchBar /> should render and match the snapshot 1`] = `
 }
 
 .emotion-1::-webkit-input-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-1::-moz-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-1:-ms-input-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-1::placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-1:focus {
-  border-color: #ff6b35;
+  border-color: var(--musica-accent);
   box-shadow: 0 0 24px rgba(255, 107, 53, 0.12);
 }
 

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
+import { C } from './colors';
 
 const spin = keyframes`
   from { transform: rotate(0deg); }
@@ -113,7 +114,7 @@ export const BrandText = styled.h1`
   font-size: 3.2rem;
   font-weight: 800;
   letter-spacing: 0.3em;
-  color: #ffffff;
+  color: ${C.text};
   margin-bottom: 0.5rem;
   z-index: 3;
   text-shadow: 0 0 40px rgba(255, 107, 53, 0.25);
@@ -122,7 +123,7 @@ export const BrandText = styled.h1`
 export const TaglineText = styled.p`
   font-family: 'Outfit', sans-serif;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: ${C.muted};
   letter-spacing: 0.25em;
   z-index: 3;
   margin-top: 0;

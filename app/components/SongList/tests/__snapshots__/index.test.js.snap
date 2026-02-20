@@ -23,7 +23,7 @@ exports[`<SongList /> should render and match the snapshot 1`] = `
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  background: #161622;
+  background: var(--musica-cardBg);
   border-radius: 10px;
   border-left: 3px solid transparent;
   cursor: pointer;
@@ -38,7 +38,7 @@ exports[`<SongList /> should render and match the snapshot 1`] = `
   -moz-transform: translateX(4px);
   -ms-transform: translateX(4px);
   transform: translateX(4px);
-  background: #1a1a2e;
+  background: var(--musica-surface);
 }
 
 .emotion-2 {
@@ -69,7 +69,7 @@ exports[`<SongList /> should render and match the snapshot 1`] = `
   font-family: 'Syne',sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--musica-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,7 +78,7 @@ exports[`<SongList /> should render and match the snapshot 1`] = `
 .emotion-5 {
   font-family: 'Outfit',sans-serif;
   font-size: 0.8rem;
-  color: #6c7086;
+  color: var(--musica-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -87,7 +87,7 @@ exports[`<SongList /> should render and match the snapshot 1`] = `
 .emotion-6 {
   font-family: 'Outfit',sans-serif;
   font-size: 0.75rem;
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

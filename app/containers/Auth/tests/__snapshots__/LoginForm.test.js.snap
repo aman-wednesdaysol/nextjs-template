@@ -5,23 +5,23 @@ exports[`<LoginForm /> should render and match the snapshot 1`] = `
   width: 100%;
   max-width: 420px;
   padding: 3rem;
-  background: #161622;
+  background: var(--musica-bg);
   border-radius: 16px;
-  border: 1px solid #2d2d44;
+  border: 1px solid var(--musica-border);
 }
 
 .emotion-1 {
   font-family: 'Syne',sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--musica-text);
   margin-bottom: 0.5rem;
 }
 
 .emotion-2 {
   font-family: 'Outfit',sans-serif;
   font-size: 0.95rem;
-  color: #6c7086;
+  color: var(--musica-muted);
   margin-bottom: 2rem;
 }
 
@@ -32,7 +32,7 @@ exports[`<LoginForm /> should render and match the snapshot 1`] = `
 .emotion-4 {
   font-family: 'Outfit',sans-serif;
   font-size: 0.85rem;
-  color: #9ca0b0;
+  color: var(--musica-label);
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -40,10 +40,10 @@ exports[`<LoginForm /> should render and match the snapshot 1`] = `
 .emotion-5 {
   width: 100%;
   padding: 0.85rem 1rem;
-  background: #1e1e30;
-  border: 1.5px solid #2d2d44;
+  background: var(--musica-inputBg);
+  border: 1.5px solid var(--musica-border);
   border-radius: 10px;
-  color: #ffffff;
+  color: var(--musica-text);
   font-family: 'Outfit',sans-serif;
   font-size: 0.95rem;
   outline: none;
@@ -53,23 +53,23 @@ exports[`<LoginForm /> should render and match the snapshot 1`] = `
 }
 
 .emotion-5::-webkit-input-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5::-moz-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5:-ms-input-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5::placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5:focus {
-  border-color: #ff6b35;
+  border-color: var(--musica-accent);
   box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
 }
 
@@ -80,10 +80,10 @@ exports[`<LoginForm /> should render and match the snapshot 1`] = `
 .emotion-9 {
   width: 100%;
   padding: 0.9rem;
-  background: linear-gradient(135deg, #ff6b35, #e84393);
+  background: linear-gradient(135deg, var(--musica-accent), var(--musica-pink));
   border: none;
   border-radius: 10px;
-  color: #ffffff;
+  color: var(--musica-text);
   font-family: 'Syne',sans-serif;
   font-size: 1rem;
   font-weight: 600;
@@ -121,13 +121,13 @@ exports[`<LoginForm /> should render and match the snapshot 1`] = `
 .emotion-10 {
   font-family: 'Outfit',sans-serif;
   font-size: 0.9rem;
-  color: #6c7086;
+  color: var(--musica-muted);
   text-align: center;
   margin-top: 1.5rem;
 }
 
 .emotion-11 {
-  color: #ff6b35;
+  color: var(--musica-accent);
   -webkit-text-decoration: none;
   text-decoration: none;
   font-weight: 500;
@@ -137,7 +137,7 @@ exports[`<LoginForm /> should render and match the snapshot 1`] = `
 }
 
 .emotion-11:hover {
-  color: #e84393;
+  color: var(--musica-pink);
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }

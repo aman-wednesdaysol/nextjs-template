@@ -3,8 +3,8 @@
 exports[`<Music /> container should render and match the snapshot 1`] = `
 .emotion-0 {
   min-height: 100vh;
-  background: #0d0d0d;
-  color: #ffffff;
+  background: var(--musica-bg);
+  color: var(--musica-text);
   padding-bottom: 100px;
   position: relative;
 }
@@ -36,7 +36,7 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
   font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: 0.2em;
-  color: #ffffff;
+  color: var(--musica-text);
   text-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
 }
 
@@ -49,10 +49,10 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
 .emotion-5 {
   width: 100%;
   padding: 1rem 1.25rem;
-  background: #1e1e30;
-  border: 1.5px solid #2d2d44;
+  background: var(--musica-inputBg);
+  border: 1.5px solid var(--musica-border);
   border-radius: 12px;
-  color: #ffffff;
+  color: var(--musica-text);
   font-family: 'Outfit',sans-serif;
   font-size: 1rem;
   outline: none;
@@ -62,23 +62,23 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
 }
 
 .emotion-5::-webkit-input-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5::-moz-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5:-ms-input-placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5::placeholder {
-  color: #4a4a5a;
+  color: var(--musica-placeholder);
 }
 
 .emotion-5:focus {
-  border-color: #ff6b35;
+  border-color: var(--musica-accent);
   box-shadow: 0 0 24px rgba(255, 107, 53, 0.12);
 }
 
@@ -107,6 +107,9 @@ exports[`<Music /> container should render and match the snapshot 1`] = `
           >
             MUSICA
           </h1>
+          <div
+            data-testid="theme-toggle"
+          />
         </header>
         <div
           class="emotion-4"

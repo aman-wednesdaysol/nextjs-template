@@ -3,6 +3,12 @@ import { fireEvent } from '@testing-library/react'
 import { renderProvider } from '@utils/testUtils'
 import { MusicTest as Music } from '../index'
 
+jest.mock('@components/ThemeToggle', () => {
+  const Mock = () => <div data-testid='theme-toggle' />
+  Mock.displayName = 'MockThemeToggle'
+  return Mock
+})
+
 jest.mock('@components/AudioPlayer', () => {
   const PT = require('prop-types')
   const MockPlayer = ({ onNext, onPrev }) => (

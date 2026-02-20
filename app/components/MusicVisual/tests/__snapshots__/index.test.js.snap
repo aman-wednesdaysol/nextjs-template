@@ -436,7 +436,7 @@ exports[`<MusicVisual /> should render and match the snapshot 1`] = `
   font-size: 3.2rem;
   font-weight: 800;
   letter-spacing: 0.3em;
-  color: #ffffff;
+  color: var(--musica-text);
   margin-bottom: 0.5rem;
   z-index: 3;
   text-shadow: 0 0 40px rgba(255, 107, 53, 0.25);
@@ -445,7 +445,7 @@ exports[`<MusicVisual /> should render and match the snapshot 1`] = `
 .emotion-1 {
   font-family: 'Outfit',sans-serif;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--musica-muted);
   letter-spacing: 0.25em;
   z-index: 3;
   margin-top: 0;

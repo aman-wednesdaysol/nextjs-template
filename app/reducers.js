@@ -7,6 +7,7 @@ import { combineReducers } from 'redux';
 
 import repos from './containers/Repos/reducer';
 import info from './containers/Info/reducer';
+import auth from './containers/Auth/reducer';
 
 enableAllPlugins();
 
@@ -17,7 +18,8 @@ export default function createReducer(injectedReducer = {}) {
   const rootReducer = combineReducers({
     ...injectedReducer,
     repos,
-    info
+    info,
+    auth
   });
 
   return rootReducer;

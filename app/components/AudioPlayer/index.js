@@ -53,9 +53,10 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
         max={player.duration || 0}
         value={player.currentTime}
         onChange={(e) => player.seek(Number(e.target.value))}
+        style={{ '--fill': `${player.duration ? (player.currentTime / player.duration) * 100 : 0}%` }}
       />
       <VolumeGroup>
-        <SoundFilled data-testid="volume-icon" style={{ color: '#e84393', fontSize: '1rem' }} />
+        <SoundFilled data-testid="volume-icon" style={{ color: '#ffff', fontSize: '1rem' }} />
         <VolumeSlider
           data-testid="volume-slider"
           type="range"
@@ -64,6 +65,7 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
           step={0.05}
           value={player.volume}
           onChange={(e) => player.setVolume(Number(e.target.value))}
+          style={{ '--fill': `${player.volume * 100}%` }}
         />
       </VolumeGroup>
     </PlayerContainer>

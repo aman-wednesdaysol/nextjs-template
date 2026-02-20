@@ -83,7 +83,7 @@ export const ProgressSlider = styled.input`
   max-width: 300px;
   height: 4px;
   appearance: none;
-  background: ${C.border};
+  background: linear-gradient(to right, ${C.accent} var(--fill, 0%), ${C.border} var(--fill, 0%));
   border-radius: 2px;
   outline: none;
   &::-webkit-slider-thumb {
@@ -107,7 +107,7 @@ export const VolumeSlider = styled.input`
   width: 90px;
   height: 4px;
   appearance: none;
-  background: ${C.border};
+  background: linear-gradient(to right, ${C.accent} var(--fill, 0%), ${C.border} var(--fill, 0%));
   border-radius: 2px;
   outline: none;
   flex-shrink: 0;
@@ -116,7 +116,7 @@ export const VolumeSlider = styled.input`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: ${C.pink};
+    background: ${C.accent};
     cursor: pointer;
   }
 `;

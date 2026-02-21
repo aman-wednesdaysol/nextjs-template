@@ -56,7 +56,7 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
         style={{ '--fill': `${player.duration ? (player.currentTime / player.duration) * 100 : 0}%` }}
       />
       <VolumeGroup>
-        <SoundFilled data-testid="volume-icon" style={{ color: '#ffff', fontSize: '1rem' }} />
+        <SoundFilled data-testid="volume-icon" style={{ color: '#ff6b35', fontSize: '1rem' }} />
         <VolumeSlider
           data-testid="volume-slider"
           type="range"

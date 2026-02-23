@@ -15,6 +15,10 @@ export const TrackArtworkLarge = styled.img`
   border-radius: 16px;
   object-fit: cover;
   box-shadow: 0 8px 32px rgba(255, 107, 53, 0.2);
+  @media (max-width: 480px) {
+    width: 180px;
+    height: 180px;
+  }
 `;
 
 export const TrackMeta = styled.div`
@@ -30,6 +34,9 @@ export const TrackDetailName = styled.h2`
   font-weight: 700;
   color: ${C.text};
   margin: 0;
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 export const TrackDetailArtist = styled.p`

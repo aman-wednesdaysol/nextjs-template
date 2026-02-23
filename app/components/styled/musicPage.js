@@ -13,6 +13,9 @@ export const MusicPageWrapper = styled.div`
   color: ${C.text};
   padding-bottom: 100px;
   position: relative;
+  @media (max-width: 480px) {
+    padding-bottom: 100px;
+  }
 `;
 
 export const MusicPageContent = styled.div`
@@ -20,6 +23,12 @@ export const MusicPageContent = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem;
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
+  @media (max-width: 480px) {
+    padding: 1rem 0.75rem;
+  }
 `;
 
 export const PageHeader = styled.header`
@@ -33,7 +42,12 @@ export const PageHeader = styled.header`
   top: 0;
   z-index: 10;
   backdrop-filter: blur(12px);
-  height: 2px;
+  @media (max-width: 768px) {
+    padding: 0.75rem 1rem;
+  }
+  @media (max-width: 480px) {
+    padding: 0.6rem 0.75rem;
+  }
 `;
 
 export const PageTitle = styled.h1`
@@ -43,6 +57,10 @@ export const PageTitle = styled.h1`
   letter-spacing: 0.2em;
   color: ${C.text};
   text-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
 `;
 
 export const EmptyState = styled.div`
@@ -57,6 +75,9 @@ export const HeaderActions = styled.div`
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  @media (max-width: 480px) {
+    gap: 0.3rem;
+  }
 `;
 
 export const LoadingSpinner = styled.div`

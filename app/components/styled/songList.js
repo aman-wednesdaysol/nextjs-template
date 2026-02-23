@@ -18,6 +18,10 @@ export const SongCard = styled.div`
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 1rem;
+  @media (max-width: 480px) {
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+  }
   background: ${(p) => (p.isActive ? C.surface : C.cardBg)};
   border-radius: 10px;
   border-left: 3px solid ${(p) => (p.isActive ? C.accent : 'transparent')};

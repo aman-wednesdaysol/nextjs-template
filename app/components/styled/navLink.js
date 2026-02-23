@@ -19,4 +19,7 @@ export const NavGroup = styled.nav`
   display: flex;
   gap: 0.25rem;
   margin-left: 1.5rem;
+  @media (max-width: 480px) {
+    margin-left: 0.5rem;
+  }
 `;

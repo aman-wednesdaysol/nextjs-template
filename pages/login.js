@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import injectSaga from '@utils/injectSaga';
 import MusicVisual from '@components/MusicVisual';
 import LoginForm from '@app/containers/Auth/LoginForm';
-import { AuthPageWrapper, VisualPanel, FormPanel, FormPanelToggle } from '@components/styled/authLayout';
+import { AuthPageWrapper, VisualPanel, FormPanel, FormPanelToggle, MobileBrand } from '@components/styled/authLayout';
 import ThemeToggle from '@components/ThemeToggle';
 import { authCreators } from '@app/containers/Auth/reducer';
 import { selectAuthError, selectAuthLoading } from '@app/containers/Auth/selectors';
@@ -21,6 +21,7 @@ export const LoginPage = ({ dispatchLogin, loading, error }) => (
       <FormPanelToggle>
         <ThemeToggle />
       </FormPanelToggle>
+      <MobileBrand>MUSICA</MobileBrand>
       <LoginForm onSubmit={dispatchLogin} loading={loading} error={error} />
     </FormPanel>
   </AuthPageWrapper>

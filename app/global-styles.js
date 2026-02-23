@@ -1,12 +1,20 @@
 import { css } from '@emotion/react';
 
 const globalStyle = css`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html,
   body {
     -webkit-overflow-scrolling: touch !important;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     display: block;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   p,

@@ -44,3 +44,18 @@ export const FormPanelToggle = styled.div`
   top: 1.5rem;
   right: 1.5rem;
 `;
+
+export const MobileBrand = styled.h1`
+  display: none;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: ${C.text};
+  text-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;

@@ -11,12 +11,12 @@ export const darkPalette = {
   ...shared,
   bg: '#0d0d0d',
   cardBg: '#161622',
-  inputBg: '#d2d2db',
+  inputBg: '#ffffff',
   border: '#000000',
   text: '#ffffff',
-  muted: '#d0d0d0',
+  muted: '#ffffff',
   label: '#9ca0b0',
-  placeholder: '#fcfcfe',
+  placeholder: '#d6d6e1',
   surface: '#1a1a2e'
 };
 
@@ -24,12 +24,12 @@ export const lightPalette = {
   ...shared,
   bg: '#f4f4f8',
   cardBg: '#ffffff',
-  inputBg: '#eeeef4',
-  border: '#d8d8e4',
+  inputBg: '#ffffff',
+  border: '#000000',
   text: '#1a1a2e',
   muted: '#6c7086',
   label: '#4a4a5a',
-  placeholder: '#b0b0c0',
+  placeholder: '#000000',
   surface: '#e8e8f0'
 };
 

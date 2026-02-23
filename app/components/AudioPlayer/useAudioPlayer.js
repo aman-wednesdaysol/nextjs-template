@@ -1,10 +1,12 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useAudioSetup } from './useAudioSetup';
 
 export const useAudioPlayer = (song, onSongEnd, onPlayStateChange) => {
   const setup = useAudioSetup(onSongEnd, onPlayStateChange);
   const { audioRef, isPlaying, setIsPlaying } = setup;
   const prevTrackIdRef = useRef(song?.trackId);
+  const prevVolumeRef = useRef(setup.volume || 1);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     if (!song?.previewUrl) {
@@ -49,12 +51,24 @@ export const useAudioPlayer = (song, onSongEnd, onPlayStateChange) => {
     }
   }, []);
 
+  const toggleMute = useCallback(() => {
+    if (isMuted) {
+      setVolume(prevVolumeRef.current);
+    } else {
+      prevVolumeRef.current = setup.volume || 1;
+      setVolume(0);
+    }
+    setIsMuted(!isMuted);
+  }, [isMuted, setup.volume]);
+
   return {
     isPlaying,
+    isMuted,
     currentTime: setup.currentTime,
     duration: setup.duration,
     volume: setup.volume,
     togglePlay,
+    toggleMute,
     seek,
     setVolume
   };

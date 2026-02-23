@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { C } from './colors';
+export { ProgressSlider, VolumeGroup, VolumeSlider } from './playerSliders';
 
 export const PlayerContainer = styled.div`
   position: fixed;
@@ -15,6 +16,16 @@ export const PlayerContainer = styled.div`
   padding: 0 1.5rem;
   gap: 1.25rem;
   z-index: 100;
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+    gap: 0.75rem;
+  }
+  @media (max-width: 480px) {
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
 `;
 
 export const NowPlayingArt = styled.img`
@@ -23,6 +34,11 @@ export const NowPlayingArt = styled.img`
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+  }
 `;
 
 export const PlayerTrackInfo = styled.div`
@@ -31,6 +47,12 @@ export const PlayerTrackInfo = styled.div`
   min-width: 0;
   width: 180px;
   flex-shrink: 0;
+  @media (max-width: 768px) {
+    width: 120px;
+  }
+  @media (max-width: 480px) {
+    width: 90px;
+  }
 `;
 
 export const TrackTitle = styled.span`
@@ -55,6 +77,11 @@ export const PlayerControls = styled.div`
   gap: 0.75rem;
   flex: 1;
   justify-content: center;
+  @media (max-width: 480px) {
+    gap: 0.25rem;
+    flex: 0 0 100%;
+    order: 5;
+  }
 `;
 
 export const ControlButton = styled.button`
@@ -76,47 +103,8 @@ export const ControlButton = styled.button`
   &:active {
     transform: scale(0.94);
   }
-`;
-
-export const ProgressSlider = styled.input`
-  flex: 1;
-  max-width: 300px;
-  height: 4px;
-  appearance: none;
-  background: linear-gradient(to right, ${C.accent} var(--fill, 0%), ${C.border} var(--fill, 0%));
-  border-radius: 2px;
-  outline: none;
-  &::-webkit-slider-thumb {
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: ${C.accent};
-    cursor: pointer;
-  }
-`;
-
-export const VolumeGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-`;
-
-export const VolumeSlider = styled.input`
-  width: 90px;
-  height: 4px;
-  appearance: none;
-  background: linear-gradient(to right, ${C.accent} var(--fill, 0%), ${C.border} var(--fill, 0%));
-  border-radius: 2px;
-  outline: none;
-  flex-shrink: 0;
-  &::-webkit-slider-thumb {
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: ${C.accent};
-    cursor: pointer;
+  @media (max-width: 480px) {
+    padding: 0.4rem 0.5rem;
+    font-size: ${(p) => (p.primary ? '1.4rem' : '1rem')};
   }
 `;

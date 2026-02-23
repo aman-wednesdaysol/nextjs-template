@@ -21,6 +21,8 @@ import {
   VolumeSlider
 } from '@components/styled/playerBar';
 
+const progressFill = (time, dur) => `${dur ? (time / dur) * 100 : 0}%`;
+
 const AudioPlayer = ({ currentSong, onNext, onPrev, onPlayStateChange, onRegisterToggle }) => {
   const player = useAudioPlayer(currentSong, onNext, onPlayStateChange);
 
@@ -59,10 +61,13 @@ const AudioPlayer = ({ currentSong, onNext, onPrev, onPlayStateChange, onRegiste
         max={player.duration || 0}
         value={player.currentTime}
         onChange={(e) => player.seek(Number(e.target.value))}
-        style={{ '--fill': `${player.duration ? (player.currentTime / player.duration) * 100 : 0}%` }}
+        style={{ '--fill': progressFill(player.currentTime, player.duration) }}
       />
-      <VolumeGroup>
-        <SoundFilled data-testid="volume-icon" style={{ color: '#ff6b35', fontSize: '1rem' }} />
+      <VolumeGroup onClick={player.toggleMute} data-testid="volume-toggle">
+        <SoundFilled
+          data-testid="volume-icon"
+          style={{ color: player.isMuted ? '#666' : '#ff6b35', fontSize: '1rem' }}
+        />
         <VolumeSlider
           data-testid="volume-slider"
           type="range"
@@ -70,6 +75,7 @@ const AudioPlayer = ({ currentSong, onNext, onPrev, onPlayStateChange, onRegiste
           max={1}
           step={0.05}
           value={player.volume}
+          onClick={(e) => e.stopPropagation()}
           onChange={(e) => player.setVolume(Number(e.target.value))}
           style={{ '--fill': `${player.volume * 100}%` }}
         />

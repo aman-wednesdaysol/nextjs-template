@@ -47,6 +47,17 @@ jest.mock('@components/ArtworkPlayButton', () => {
   return Mock
 })
 
+beforeAll(() => {
+  global.IntersectionObserver = jest.fn(() => ({
+    observe: jest.fn(),
+    disconnect: jest.fn()
+  }))
+})
+
+afterAll(() => {
+  delete global.IntersectionObserver
+})
+
 const mockSongs = [
   {
     trackId: 1,
@@ -78,7 +89,10 @@ describe('<Music /> container', () => {
     dispatchFetchLibrary: jest.fn(),
     dispatchLike: jest.fn(),
     dispatchUnlike: jest.fn(),
-    dispatchSetIsPlaying: jest.fn()
+    dispatchSetIsPlaying: jest.fn(),
+    dispatchLoadMore: jest.fn(),
+    hasMore: false,
+    loadingMore: false
   }
 
   beforeEach(() => jest.clearAllMocks())
@@ -104,6 +118,11 @@ describe('<Music /> container', () => {
     expect(defaultProps.dispatchFetchLibrary).toHaveBeenCalledTimes(1)
   })
 
+  it('should dispatch default search on mount', () => {
+    renderProvider(<Music {...defaultProps} />)
+    expect(defaultProps.dispatchSearch).toHaveBeenCalledWith('top hits')
+  })
+
   it('should render songs when provided', () => {
     const props = { ...defaultProps, songs: mockSongs }
     const { getByTestId } = renderProvider(<Music {...props} />)
@@ -123,5 +142,23 @@ describe('<Music /> container', () => {
     const { fireEvent } = require('@testing-library/react')
     fireEvent.click(getByTestId('song-1'))
     expect(mockPush).toHaveBeenCalledWith('/track/1')
+  })
+
+  it('should render scroll sentinel when hasMore is true', () => {
+    const props = { ...defaultProps, songs: mockSongs, hasMore: true }
+    const { getByTestId } = renderProvider(<Music {...props} />)
+    expect(getByTestId('scroll-sentinel')).toBeTruthy()
+  })
+
+  it('should not render scroll sentinel when hasMore is false', () => {
+    const props = { ...defaultProps, songs: mockSongs, hasMore: false }
+    const { queryByTestId } = renderProvider(<Music {...props} />)
+    expect(queryByTestId('scroll-sentinel')).toBeNull()
+  })
+
+  it('should render loading-more spinner when loadingMore', () => {
+    const props = { ...defaultProps, songs: mockSongs, loadingMore: true }
+    const { getByTestId } = renderProvider(<Music {...props} />)
+    expect(getByTestId('loading-more-spinner')).toBeTruthy()
   })
 })

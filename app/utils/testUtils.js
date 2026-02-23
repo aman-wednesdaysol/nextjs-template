@@ -23,9 +23,10 @@ export const renderProvider = (children) => {
   );
 };
 export const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-export const apiResponseGenerator = (ok, data) => ({
+export const apiResponseGenerator = (ok, data, headers = {}) => ({
   ok,
-  data
+  data,
+  headers
 });
 
 export const renderStoreProvider = (children) => {

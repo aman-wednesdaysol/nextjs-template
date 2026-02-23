@@ -43,4 +43,18 @@ describe('<HeartButton />', () => {
     expect(mockClick).toHaveBeenCalledTimes(1)
     expect(parentClick).not.toHaveBeenCalled()
   })
+
+  it('should show "Like" tooltip when not liked', () => {
+    const { container } = renderProvider(
+      <HeartButton isLiked={false} onClick={mockClick} />
+    )
+    expect(container.firstChild).toHaveAttribute('label', 'Like')
+  })
+
+  it('should show "Dislike" tooltip when liked', () => {
+    const { container } = renderProvider(
+      <HeartButton isLiked={true} onClick={mockClick} />
+    )
+    expect(container.firstChild).toHaveAttribute('label', 'Dislike')
+  })
 })

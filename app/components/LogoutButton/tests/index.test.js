@@ -39,4 +39,9 @@ describe('<LogoutButton />', () => {
     fireEvent.click(getByTestId('logout-button'))
     expect(Router.push).toHaveBeenCalledWith('/login')
   })
+
+  it('should show "Log out" tooltip', () => {
+    const { container } = renderProvider(<LogoutButton />)
+    expect(container.firstChild).toHaveAttribute('label', 'Log out')
+  })
 })

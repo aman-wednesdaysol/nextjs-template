@@ -25,4 +25,15 @@ describe('<ThemeToggle />', () => {
     fireEvent.click(getByTestId('theme-toggle'))
     expect(getByLabelText('Switch to dark theme')).toBeTruthy()
   })
+
+  it('should show "Light mode" tooltip in dark mode', () => {
+    const { container } = renderWithTheme(<ThemeToggle />)
+    expect(container.firstChild).toHaveAttribute('label', 'Light mode')
+  })
+
+  it('should show "Dark mode" tooltip in light mode', () => {
+    const { container, getByTestId } = renderWithTheme(<ThemeToggle />)
+    fireEvent.click(getByTestId('theme-toggle'))
+    expect(container.firstChild).toHaveAttribute('label', 'Dark mode')
+  })
 })

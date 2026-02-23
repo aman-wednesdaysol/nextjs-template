@@ -33,11 +33,12 @@ export const PageHeader = styled.header`
   top: 0;
   z-index: 10;
   backdrop-filter: blur(12px);
+  height: 2px;
 `;
 
 export const PageTitle = styled.h1`
   font-family: 'Syne', sans-serif;
-  font-size: 2.2rem;
+  font-size: 1.2rem;
   font-weight: 800;
   letter-spacing: 0.2em;
   color: ${C.text};

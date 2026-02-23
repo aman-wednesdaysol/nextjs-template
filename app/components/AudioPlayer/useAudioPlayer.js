@@ -1,67 +1,39 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
-import { DEFAULT_VOLUME } from './constants';
+import { useRef, useEffect, useCallback } from 'react';
+import { useAudioSetup } from './useAudioSetup';
 
 export const useAudioPlayer = (song, onSongEnd, onPlayStateChange) => {
-  const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolumeState] = useState(DEFAULT_VOLUME);
+  const setup = useAudioSetup(onSongEnd, onPlayStateChange);
+  const { audioRef, isPlaying, setIsPlaying } = setup;
+  const prevTrackIdRef = useRef(song?.trackId);
 
   useEffect(() => {
-    const audio = new Audio();
-    audio.volume = DEFAULT_VOLUME;
-    audioRef.current = audio;
-
-    const onTime = () => setCurrentTime(audio.currentTime);
-    const onLoaded = () => setDuration(audio.duration);
-    const onEnded = () => {
-      setIsPlaying(false);
-      if (onPlayStateChange) {
-        onPlayStateChange(false);
-      }
-      if (onSongEnd) {
-        onSongEnd();
-      }
-    };
-
-    audio.addEventListener('timeupdate', onTime);
-    audio.addEventListener('loadedmetadata', onLoaded);
-    audio.addEventListener('ended', onEnded);
-
-    return () => {
-      audio.removeEventListener('timeupdate', onTime);
-      audio.removeEventListener('loadedmetadata', onLoaded);
-      audio.removeEventListener('ended', onEnded);
-      audio.pause();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (song?.previewUrl && audioRef.current) {
-      audioRef.current.src = song.previewUrl;
-      audioRef.current.play().catch(() => {});
-      setIsPlaying(true);
-      if (onPlayStateChange) {
-        onPlayStateChange(true);
-      }
+    if (!song?.previewUrl) {
+      return;
     }
+
+    const isNewSong = prevTrackIdRef.current !== song.trackId;
+    prevTrackIdRef.current = song.trackId;
+
+    if (!isNewSong) {
+      return;
+    }
+
+    audioRef.current.src = song.previewUrl;
+    audioRef.current.play().catch(() => {});
+    setIsPlaying(true);
+    onPlayStateChange?.(true);
   }, [song?.trackId]);
 
   const togglePlay = useCallback(() => {
     if (!audioRef.current?.src) {
       return;
     }
+
     const next = !isPlaying;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {});
-    }
+    isPlaying ? audioRef.current.pause() : audioRef.current.play().catch(() => {});
+
     setIsPlaying(next);
-    if (onPlayStateChange) {
-      onPlayStateChange(next);
-    }
+    onPlayStateChange?.(next);
   }, [isPlaying, onPlayStateChange]);
 
   const seek = useCallback((time) => {
@@ -71,11 +43,19 @@ export const useAudioPlayer = (song, onSongEnd, onPlayStateChange) => {
   }, []);
 
   const setVolume = useCallback((v) => {
-    setVolumeState(v);
+    setup.setVolumeState(v);
     if (audioRef.current) {
       audioRef.current.volume = v;
     }
   }, []);
 
-  return { isPlaying, currentTime, duration, volume, togglePlay, seek, setVolume };
+  return {
+    isPlaying,
+    currentTime: setup.currentTime,
+    duration: setup.duration,
+    volume: setup.volume,
+    togglePlay,
+    seek,
+    setVolume
+  };
 };

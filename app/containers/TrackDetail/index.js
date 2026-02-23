@@ -45,12 +45,12 @@ export function TrackDetail(props) {
 
   return (
     <MusicPageWrapper>
+      <PageHeader>
+        <BackButton onClick={() => router.back()} />
+        <PageTitle>MUSICA</PageTitle>
+        <div />
+      </PageHeader>
       <MusicPageContent>
-        <PageHeader>
-          <BackButton onClick={() => router.back()} />
-          <PageTitle>MUSICA</PageTitle>
-          <div />
-        </PageHeader>
         <If condition={loading}>
           <LoadingSpinner data-testid="loading-spinner" />
         </If>

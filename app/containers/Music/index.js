@@ -56,18 +56,18 @@ export function Music(props) {
 
   return (
     <MusicPageWrapper>
+      <PageHeader>
+        <PageTitle>MUSICA</PageTitle>
+        <NavGroup>
+          <NavLink href="/" label="Search" isActive />
+          <NavLink href="/library" label="Favorites" />
+        </NavGroup>
+        <HeaderActions>
+          <ThemeToggle />
+          <LogoutButton />
+        </HeaderActions>
+      </PageHeader>
       <MusicPageContent>
-        <PageHeader>
-          <PageTitle>MUSICA</PageTitle>
-          <NavGroup>
-            <NavLink href="/" label="Search" isActive />
-            <NavLink href="/library" label="Favorites" />
-          </NavGroup>
-          <HeaderActions>
-            <ThemeToggle />
-            <LogoutButton />
-          </HeaderActions>
-        </PageHeader>
         <SearchBar value={searchValue} onChange={handleSearch} loading={loading} />
         <If condition={loading}>
           <LoadingSpinner data-testid="loading-spinner" />

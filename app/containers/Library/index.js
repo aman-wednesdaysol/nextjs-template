@@ -44,18 +44,18 @@ export function Library(props) {
 
   return (
     <MusicPageWrapper>
+      <PageHeader>
+        <PageTitle>MUSICA</PageTitle>
+        <NavGroup>
+          <NavLink href="/" label="Search" />
+          <NavLink href="/library" label="Favorites" isActive />
+        </NavGroup>
+        <HeaderActions>
+          <ThemeToggle />
+          <LogoutButton />
+        </HeaderActions>
+      </PageHeader>
       <MusicPageContent>
-        <PageHeader>
-          <PageTitle>MUSICA</PageTitle>
-          <NavGroup>
-            <NavLink href="/" label="Search" />
-            <NavLink href="/library" label="Favorites" isActive />
-          </NavGroup>
-          <HeaderActions>
-            <ThemeToggle />
-            <LogoutButton />
-          </HeaderActions>
-        </PageHeader>
         <If condition={loading}>
           <LoadingSpinner data-testid="loading-spinner" />
         </If>

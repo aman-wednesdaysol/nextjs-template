@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SearchContainer, SearchInput } from '@components/styled/musicSearch';
 
-const SearchBar = ({ value, onChange, loading }) => (
+const SearchBar = ({ value, onChange }) => (
   <SearchContainer>
     <SearchInput
       data-testid="music-search-input"
@@ -10,15 +10,13 @@ const SearchBar = ({ value, onChange, loading }) => (
       placeholder="Search songs, artists..."
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      disabled={loading}
     />
   </SearchContainer>
 );
 
 SearchBar.propTypes = {
   value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  loading: PropTypes.bool
+  onChange: PropTypes.func.isRequired
 };
 
 export default SearchBar;

@@ -77,7 +77,7 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
   border-color: #3d3d54;
 }
 
-.emotion-12 {
+.emotion-9 {
   width: 100%;
   padding: 0.9rem;
   background: linear-gradient(135deg, var(--musica-accent), var(--musica-pink));
@@ -94,7 +94,7 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
   letter-spacing: 0.05em;
 }
 
-.emotion-12:hover {
+.emotion-9:hover {
   -webkit-transform: translateY(-2px);
   -moz-transform: translateY(-2px);
   -ms-transform: translateY(-2px);
@@ -102,14 +102,14 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
   box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
 }
 
-.emotion-12:active {
+.emotion-9:active {
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
 }
 
-.emotion-12:disabled {
+.emotion-9:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   -webkit-transform: none;
@@ -118,7 +118,7 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
   transform: none;
 }
 
-.emotion-13 {
+.emotion-10 {
   font-family: 'Outfit',sans-serif;
   font-size: 0.9rem;
   color: var(--musica-muted);
@@ -126,7 +126,7 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
   margin-top: 1.5rem;
 }
 
-.emotion-14 {
+.emotion-11 {
   color: var(--musica-accent);
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -136,7 +136,7 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
   transition: color 0.2s ease;
 }
 
-.emotion-14:hover {
+.emotion-11:hover {
   color: var(--musica-pink);
   -webkit-text-decoration: underline;
   text-decoration: underline;
@@ -158,25 +158,6 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
         Create your account and start listening
       </p>
       <form>
-        <div
-          class="emotion-3"
-        >
-          <label
-            class="emotion-4"
-            for="signup-name"
-          >
-            Full Name
-          </label>
-          <input
-            class="emotion-5"
-            data-testid="signup-name"
-            id="signup-name"
-            placeholder="Your name"
-            required=""
-            type="text"
-            value=""
-          />
-        </div>
         <div
           class="emotion-3"
         >
@@ -216,7 +197,7 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="emotion-12"
+          class="emotion-9"
           data-testid="signup-submit"
           type="submit"
         >
@@ -224,12 +205,12 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
         </button>
       </form>
       <p
-        class="emotion-13"
+        class="emotion-10"
       >
         Already have an account?
          
         <a
-          class="emotion-14"
+          class="emotion-11"
           href="/login"
         >
           Sign in

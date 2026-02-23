@@ -15,13 +15,12 @@ import {
 } from '@components/styled/authForm';
 
 const SignupForm = ({ onSubmit, loading, error }) => {
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(name, email, password);
+    onSubmit(email, password);
   };
 
   return (
@@ -29,18 +28,6 @@ const SignupForm = ({ onSubmit, loading, error }) => {
       <FormTitle>Join the beat</FormTitle>
       <FormSubtitle>Create your account and start listening</FormSubtitle>
       <form onSubmit={handleSubmit}>
-        <InputWrapper>
-          <InputLabel htmlFor="signup-name">Full Name</InputLabel>
-          <StyledInput
-            id="signup-name"
-            data-testid="signup-name"
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </InputWrapper>
         <InputWrapper>
           <InputLabel htmlFor="signup-email">Email</InputLabel>
           <StyledInput

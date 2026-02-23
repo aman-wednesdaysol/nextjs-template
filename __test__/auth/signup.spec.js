@@ -8,7 +8,6 @@ test.describe('Signup Page', () => {
   });
 
   test('renders signup form fields', async ({ page }) => {
-    await expect(page.getByTestId('signup-name')).toBeVisible();
     await expect(page.getByTestId('signup-email')).toBeVisible();
     await expect(page.getByTestId('signup-password')).toBeVisible();
     await expect(page.getByTestId('signup-submit')).toBeVisible();
@@ -19,7 +18,6 @@ test.describe('Signup Page', () => {
     await mockLibrary(page);
     await mockSearchSongs(page, []);
 
-    await page.getByTestId('signup-name').fill(TEST_USER.name);
     await page.getByTestId('signup-email').fill(TEST_USER.email);
     await page.getByTestId('signup-password').fill(TEST_USER.password);
     await page.getByTestId('signup-submit').click();
@@ -30,7 +28,6 @@ test.describe('Signup Page', () => {
   test('failed signup shows error message', async ({ page }) => {
     await mockSignupFailure(page);
 
-    await page.getByTestId('signup-name').fill(TEST_USER.name);
     await page.getByTestId('signup-email').fill(TEST_USER.email);
     await page.getByTestId('signup-password').fill(TEST_USER.password);
     await page.getByTestId('signup-submit').click();

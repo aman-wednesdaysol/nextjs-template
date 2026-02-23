@@ -40,7 +40,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   const { requestSignup } = authCreators;
   return {
-    dispatchSignup: (name, email, password) => dispatch(requestSignup(name, email, password))
+    dispatchSignup: (email, password) => dispatch(requestSignup(email, password))
   };
 }
 

@@ -45,14 +45,13 @@ describe('Auth saga tests', () => {
   })
 
   describe('handleSignup', () => {
-    const action = { name: 'Test', email: 'test@test.com', password: 'pass123' }
+    const action = { email: 'test@test.com', password: 'pass123' }
 
     it('should dispatch SUCCESS_AUTH on successful signup', () => {
       const gen = handleSignup(action)
       const res = gen.next().value
       expect(res).toEqual(
         call(signupUser, {
-          name: action.name,
           email: action.email,
           password: action.password
         })

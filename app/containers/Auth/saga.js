@@ -27,8 +27,8 @@ export function* handleLogin(action) {
 }
 
 export function* handleSignup(action) {
-  const { name, email, password } = action;
-  const response = yield call(signupUser, { name, email, password });
+  const { email, password } = action;
+  const response = yield call(signupUser, { email, password });
   if (response.ok) {
     yield put(successAuth(response.data));
     persistToken(response.data);

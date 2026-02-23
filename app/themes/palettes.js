@@ -16,7 +16,7 @@ export const darkPalette = {
   text: '#ffffff',
   muted: '#d0d0d0',
   label: '#9ca0b0',
-  placeholder: '#070708',
+  placeholder: '#fcfcfe',
   surface: '#1a1a2e'
 };
 

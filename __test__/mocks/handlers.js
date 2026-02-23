@@ -38,15 +38,21 @@ export const mockTrackDetailError = (page) =>
   );
 
 export const mockLibrary = (page, songs = []) =>
-  page.route(`${API}/music/library`, (route) => {
-    if (route.request().method() === 'GET') {
-      return route.fulfill(json(songs));
+  page.route(
+    (url) => url.pathname === '/music/library',
+    (route) => {
+      if (route.request().method() === 'GET') {
+        return route.fulfill(json(songs));
+      }
+      return route.continue();
     }
-    return route.continue();
-  });
+  );
 
 export const mockLikeSong = (page) =>
-  page.route(`${API}/music/library/like`, (route) => route.fulfill(json({ success: true })));
+  page.route(
+    (url) => url.pathname === '/music/library/like',
+    (route) => route.fulfill(json({ success: true }))
+  );
 
 export const mockUnlikeSong = (page) =>
   page.route(

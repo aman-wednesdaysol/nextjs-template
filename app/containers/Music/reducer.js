@@ -7,6 +7,7 @@ export const initialState = {
   [MUSIC_PAYLOAD.SEARCH_TERM]: '',
   [MUSIC_PAYLOAD.SONGS]: [],
   [MUSIC_PAYLOAD.CURRENT_SONG]: null,
+  [MUSIC_PAYLOAD.IS_PLAYING]: false,
   [PAYLOAD.ERROR]: null,
   [PAYLOAD.LOADING]: false
 };
@@ -16,6 +17,7 @@ export const { Types: musicTypes, Creators: musicCreators } = createActions({
   successSearchSongs: [PAYLOAD.DATA],
   failureSearchSongs: [PAYLOAD.ERROR],
   setCurrentSong: [MUSIC_PAYLOAD.CURRENT_SONG],
+  setIsPlaying: [MUSIC_PAYLOAD.IS_PLAYING],
   clearMusic: null
 });
 
@@ -37,6 +39,11 @@ const handleFailure = (draft, action) => {
 
 const handleSetSong = (draft, action) => {
   draft[MUSIC_PAYLOAD.CURRENT_SONG] = action[MUSIC_PAYLOAD.CURRENT_SONG];
+  draft[MUSIC_PAYLOAD.IS_PLAYING] = true;
+};
+
+const handleSetIsPlaying = (draft, action) => {
+  draft[MUSIC_PAYLOAD.IS_PLAYING] = action[MUSIC_PAYLOAD.IS_PLAYING];
 };
 
 const handlers = {
@@ -44,6 +51,7 @@ const handlers = {
   [musicTypes.SUCCESS_SEARCH_SONGS]: handleSuccess,
   [musicTypes.FAILURE_SEARCH_SONGS]: handleFailure,
   [musicTypes.SET_CURRENT_SONG]: handleSetSong,
+  [musicTypes.SET_IS_PLAYING]: handleSetIsPlaying,
   [musicTypes.CLEAR_MUSIC]: () => initialState
 };
 

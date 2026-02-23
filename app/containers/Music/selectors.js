@@ -16,3 +16,5 @@ export const selectCurrentSong = () =>
   createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.CURRENT_SONG, null));
 
 export const selectSearchTerm = () => createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.SEARCH_TERM, ''));
+
+export const selectIsPlaying = () => createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.IS_PLAYING, false));

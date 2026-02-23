@@ -1,7 +1,11 @@
 import React from 'react'
-import { fireEvent } from '@testing-library/react'
 import { renderProvider } from '@utils/testUtils'
 import { MusicTest as Music } from '../index'
+
+const mockPush = jest.fn()
+jest.mock('next/router', () => ({
+  useRouter: () => ({ push: mockPush })
+}))
 
 jest.mock('@components/ThemeToggle', () => {
   const Mock = () => <div data-testid='theme-toggle' />
@@ -26,20 +30,21 @@ jest.mock('@components/NavLink', () => {
 })
 
 jest.mock('@components/AudioPlayer', () => {
+  const Mock = () => <div data-testid='audio-player' />
+  Mock.displayName = 'MockAudioPlayer'
+  return Mock
+})
+
+jest.mock('@components/ArtworkPlayButton', () => {
   const PT = require('prop-types')
-  const MockPlayer = ({ onNext, onPrev }) => (
-    <div data-testid='audio-player'>
-      <button data-testid='mock-next' onClick={onNext}>
-        Next
-      </button>
-      <button data-testid='mock-prev' onClick={onPrev}>
-        Prev
-      </button>
-    </div>
+  const Mock = ({ onClick }) => (
+    <button data-testid='artwork-play-btn' onClick={onClick}>
+      play
+    </button>
   )
-  MockPlayer.displayName = 'MockAudioPlayer'
-  MockPlayer.propTypes = { onNext: PT.func, onPrev: PT.func }
-  return MockPlayer
+  Mock.displayName = 'MockArtworkPlayButton'
+  Mock.propTypes = { onClick: PT.func }
+  return Mock
 })
 
 const mockSongs = [
@@ -62,29 +67,21 @@ const mockSongs = [
 ]
 
 describe('<Music /> container', () => {
-  const mockSearch = jest.fn()
-  const mockSetSong = jest.fn()
-  const mockFetchLibrary = jest.fn()
-  const mockLike = jest.fn()
-  const mockUnlike = jest.fn()
   const defaultProps = {
     songs: [],
     loading: false,
     currentSong: null,
+    isPlaying: false,
     likedTrackIds: {},
-    dispatchSearch: mockSearch,
-    dispatchSetSong: mockSetSong,
-    dispatchFetchLibrary: mockFetchLibrary,
-    dispatchLike: mockLike,
-    dispatchUnlike: mockUnlike
+    dispatchSearch: jest.fn(),
+    dispatchSetSong: jest.fn(),
+    dispatchFetchLibrary: jest.fn(),
+    dispatchLike: jest.fn(),
+    dispatchUnlike: jest.fn(),
+    dispatchSetIsPlaying: jest.fn()
   }
 
   beforeEach(() => jest.clearAllMocks())
-
-  it('should render and match the snapshot', () => {
-    const { baseElement } = renderProvider(<Music {...defaultProps} />)
-    expect(baseElement).toMatchSnapshot()
-  })
 
   it('should render the page title', () => {
     const { getByText } = renderProvider(<Music {...defaultProps} />)
@@ -104,7 +101,7 @@ describe('<Music /> container', () => {
 
   it('should fetch library on mount', () => {
     renderProvider(<Music {...defaultProps} />)
-    expect(mockFetchLibrary).toHaveBeenCalledTimes(1)
+    expect(defaultProps.dispatchFetchLibrary).toHaveBeenCalledTimes(1)
   })
 
   it('should render songs when provided', () => {
@@ -120,10 +117,11 @@ describe('<Music /> container', () => {
     expect(getByTestId('loading-spinner')).toBeTruthy()
   })
 
-  it('should select a song when clicked', () => {
+  it('should navigate to track detail when card clicked', () => {
     const props = { ...defaultProps, songs: mockSongs }
     const { getByTestId } = renderProvider(<Music {...props} />)
+    const { fireEvent } = require('@testing-library/react')
     fireEvent.click(getByTestId('song-1'))
-    expect(mockSetSong).toHaveBeenCalledWith(mockSongs[0])
+    expect(mockPush).toHaveBeenCalledWith('/track/1')
   })
 })

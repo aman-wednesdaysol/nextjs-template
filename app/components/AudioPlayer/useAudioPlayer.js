@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { DEFAULT_VOLUME } from './constants';
 
-export const useAudioPlayer = (song, onSongEnd) => {
+export const useAudioPlayer = (song, onSongEnd, onPlayStateChange) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -17,6 +17,9 @@ export const useAudioPlayer = (song, onSongEnd) => {
     const onLoaded = () => setDuration(audio.duration);
     const onEnded = () => {
       setIsPlaying(false);
+      if (onPlayStateChange) {
+        onPlayStateChange(false);
+      }
       if (onSongEnd) {
         onSongEnd();
       }
@@ -39,6 +42,9 @@ export const useAudioPlayer = (song, onSongEnd) => {
       audioRef.current.src = song.previewUrl;
       audioRef.current.play().catch(() => {});
       setIsPlaying(true);
+      if (onPlayStateChange) {
+        onPlayStateChange(true);
+      }
     }
   }, [song?.trackId]);
 
@@ -46,13 +52,17 @@ export const useAudioPlayer = (song, onSongEnd) => {
     if (!audioRef.current?.src) {
       return;
     }
+    const next = !isPlaying;
     if (isPlaying) {
       audioRef.current.pause();
     } else {
       audioRef.current.play().catch(() => {});
     }
-    setIsPlaying(!isPlaying);
-  }, [isPlaying]);
+    setIsPlaying(next);
+    if (onPlayStateChange) {
+      onPlayStateChange(next);
+    }
+  }, [isPlaying, onPlayStateChange]);
 
   const seek = useCallback((time) => {
     if (audioRef.current) {

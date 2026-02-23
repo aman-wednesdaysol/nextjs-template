@@ -30,14 +30,6 @@ export const SongCard = styled.div`
   }
 `;
 
-export const SongArtwork = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 6px;
-  object-fit: cover;
-  flex-shrink: 0;
-`;
-
 export const SongInfo = styled.div`
   display: flex;
   flex-direction: column;

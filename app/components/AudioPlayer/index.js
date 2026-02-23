@@ -21,8 +21,14 @@ import {
   VolumeSlider
 } from '@components/styled/playerBar';
 
-const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
-  const player = useAudioPlayer(currentSong, onNext);
+const AudioPlayer = ({ currentSong, onNext, onPrev, onPlayStateChange, onRegisterToggle }) => {
+  const player = useAudioPlayer(currentSong, onNext, onPlayStateChange);
+
+  React.useEffect(() => {
+    if (onRegisterToggle) {
+      onRegisterToggle(player.togglePlay);
+    }
+  }, [player.togglePlay, onRegisterToggle]);
 
   if (!currentSong) {
     return null;
@@ -75,7 +81,9 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
 AudioPlayer.propTypes = {
   currentSong: PropTypes.object,
   onNext: PropTypes.func.isRequired,
-  onPrev: PropTypes.func.isRequired
+  onPrev: PropTypes.func.isRequired,
+  onPlayStateChange: PropTypes.func,
+  onRegisterToggle: PropTypes.func
 };
 
 export default AudioPlayer;

@@ -25,24 +25,22 @@ import { libraryCreators } from './reducer';
 import saga from './saga';
 import musicSaga from '@app/containers/Music/saga';
 import { selectLikedSongs, selectLikedTrackIds, selectLibraryLoading } from './selectors';
-import { selectCurrentSong } from '@app/containers/Music/selectors';
+import { selectCurrentSong, selectIsPlaying } from '@app/containers/Music/selectors';
 import usePlaybackNav from '@app/containers/Music/usePlaybackNav';
 import useToggleLike from '@app/containers/Music/useToggleLike';
+import usePlayToggle from '@app/containers/Music/usePlayToggle';
 
 export function Library(props) {
-  const { likedSongs, likedTrackIds, loading, currentSong } = props;
-  const { dispatchFetchLibrary, dispatchSetSong, dispatchLike, dispatchUnlike } = props;
+  const { likedSongs, likedTrackIds, loading, currentSong, isPlaying } = props;
+  const { dispatchFetchLibrary, dispatchSetSong, dispatchLike, dispatchUnlike, dispatchSetIsPlaying } = props;
 
   useEffect(() => {
     dispatchFetchLibrary();
   }, []);
 
-  const { handleNext, handlePrev } = usePlaybackNav({
-    songs: likedSongs,
-    currentSong,
-    dispatchSetSong
-  });
+  const { handleNext, handlePrev } = usePlaybackNav({ songs: likedSongs, currentSong, dispatchSetSong });
   const handleToggleLike = useToggleLike({ likedTrackIds, dispatchLike, dispatchUnlike });
+  const { handlePlayToggle, registerTogglePlay } = usePlayToggle({ currentSong, dispatchSetSong });
 
   return (
     <MusicPageWrapper>
@@ -65,7 +63,8 @@ export function Library(props) {
           <SongList
             songs={likedSongs}
             currentSong={currentSong}
-            onSelectSong={dispatchSetSong}
+            isPlaying={isPlaying}
+            onPlayToggle={handlePlayToggle}
             likedTrackIds={likedTrackIds}
             onToggleLike={handleToggleLike}
           />
@@ -76,7 +75,13 @@ export function Library(props) {
           </EmptyState>
         </If>
       </MusicPageContent>
-      <AudioPlayer currentSong={currentSong} onNext={handleNext} onPrev={handlePrev} />
+      <AudioPlayer
+        currentSong={currentSong}
+        onNext={handleNext}
+        onPrev={handlePrev}
+        onPlayStateChange={dispatchSetIsPlaying}
+        onRegisterToggle={registerTogglePlay}
+      />
     </MusicPageWrapper>
   );
 }
@@ -86,34 +91,34 @@ Library.propTypes = {
   likedTrackIds: PropTypes.object,
   loading: PropTypes.bool,
   currentSong: PropTypes.object,
+  isPlaying: PropTypes.bool,
   dispatchFetchLibrary: PropTypes.func.isRequired,
   dispatchSetSong: PropTypes.func.isRequired,
   dispatchLike: PropTypes.func.isRequired,
-  dispatchUnlike: PropTypes.func.isRequired
+  dispatchUnlike: PropTypes.func.isRequired,
+  dispatchSetIsPlaying: PropTypes.func.isRequired
 };
 
 const mapStateToProps = createStructuredSelector({
   likedSongs: selectLikedSongs(),
   likedTrackIds: selectLikedTrackIds(),
   loading: selectLibraryLoading(),
-  currentSong: selectCurrentSong()
+  currentSong: selectCurrentSong(),
+  isPlaying: selectIsPlaying()
 });
 
 function mapDispatchToProps(dispatch) {
-  const { requestFetchLibrary, requestLikeSong, requestUnlikeSong } = libraryCreators;
-  const { setCurrentSong } = musicCreators;
   return {
-    dispatchFetchLibrary: () => dispatch(requestFetchLibrary()),
-    dispatchSetSong: (song) => dispatch(setCurrentSong(song)),
-    dispatchLike: (song) => dispatch(requestLikeSong(song)),
-    dispatchUnlike: (id) => dispatch(requestUnlikeSong(id))
+    dispatchFetchLibrary: () => dispatch(libraryCreators.requestFetchLibrary()),
+    dispatchSetSong: (song) => dispatch(musicCreators.setCurrentSong(song)),
+    dispatchSetIsPlaying: (val) => dispatch(musicCreators.setIsPlaying(val)),
+    dispatchLike: (song) => dispatch(libraryCreators.requestLikeSong(song)),
+    dispatchUnlike: (id) => dispatch(libraryCreators.requestUnlikeSong(id))
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
 export default compose(
-  withConnect,
+  connect(mapStateToProps, mapDispatchToProps),
   injectSaga({ key: 'library', saga }),
   injectSaga({ key: 'music', saga: musicSaga })
 )(Library);

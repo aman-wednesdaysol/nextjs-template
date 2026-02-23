@@ -25,7 +25,8 @@
     "test:staged": "jest --findRelatedTests",
     "test:watch": "NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "generate": "react-generate"
+    "generate": "react-generate",
+    "test:playwright": "npx playwright test"
   },
   "lint-staged": {
     "*.js": [
@@ -77,10 +78,12 @@
     "@eslint/compat": "^1.1.1",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.9.1",
+    "@playwright/test": "^1.58.2",
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
+    "@types/node": "^25.3.0",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
     "axios-mock-adapter": "^1.22.0",

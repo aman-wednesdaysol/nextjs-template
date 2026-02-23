@@ -18,3 +18,10 @@ export const selectCurrentSong = () =>
 export const selectSearchTerm = () => createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.SEARCH_TERM, ''));
 
 export const selectIsPlaying = () => createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.IS_PLAYING, false));
+
+export const selectNextOffset = () => createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.NEXT_OFFSET, null));
+
+export const selectHasMore = () => createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.HAS_MORE, false));
+
+export const selectLoadingMore = () =>
+  createSelector(selectMusicDomain, (s) => get(s, MUSIC_PAYLOAD.LOADING_MORE, false));

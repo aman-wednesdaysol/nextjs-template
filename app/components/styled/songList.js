@@ -68,3 +68,8 @@ export const SongAlbum = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
+export const ScrollSentinel = styled.div`
+  height: 1px;
+  width: 100%;
+`;

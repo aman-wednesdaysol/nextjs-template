@@ -4,7 +4,10 @@ import {
   selectMusicError,
   selectCurrentSong,
   selectSearchTerm,
-  selectIsPlaying
+  selectIsPlaying,
+  selectNextOffset,
+  selectHasMore,
+  selectLoadingMore
 } from '../selectors'
 
 describe('Music selector tests', () => {
@@ -18,7 +21,10 @@ describe('Music selector tests', () => {
         error: 'Some error',
         currentSong: { trackId: 1 },
         searchTerm: 'test',
-        isPlaying: true
+        isPlaying: true,
+        nextOffset: 20,
+        hasMore: true,
+        loadingMore: false
       }
     }
   })
@@ -47,6 +53,18 @@ describe('Music selector tests', () => {
     expect(selectIsPlaying()(mockedState)).toBe(true)
   })
 
+  it('should select nextOffset', () => {
+    expect(selectNextOffset()(mockedState)).toBe(20)
+  })
+
+  it('should select hasMore', () => {
+    expect(selectHasMore()(mockedState)).toBe(true)
+  })
+
+  it('should select loadingMore', () => {
+    expect(selectLoadingMore()(mockedState)).toBe(false)
+  })
+
   it('should return defaults when music state is empty', () => {
     const empty = {}
     expect(selectMusicSongs()(empty)).toEqual([])
@@ -55,5 +73,8 @@ describe('Music selector tests', () => {
     expect(selectCurrentSong()(empty)).toBeNull()
     expect(selectSearchTerm()(empty)).toBe('')
     expect(selectIsPlaying()(empty)).toBe(false)
+    expect(selectNextOffset()(empty)).toBeNull()
+    expect(selectHasMore()(empty)).toBe(false)
+    expect(selectLoadingMore()(empty)).toBe(false)
   })
 })

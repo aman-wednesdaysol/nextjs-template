@@ -11,7 +11,8 @@
       "@utils/*": ["./app/utils/*"],
       "@images/*": ["./app/images/*"],
       "@store/*": ["./app/store/*"],
-      "@services/*": ["./app/services/*"]
+      "@services/*": ["./app/services/*"],
+      "@lib/*": ["./lib/*"]
     }
   },
   "exclude": ["node_modules", "dist", "build", "out", ".next"]

@@ -10,6 +10,7 @@ import { getStoredToken } from '@utils/authStorage';
 import { setAuthHeader } from '@utils/apiUtils';
 import { ThemeProvider } from '@app/contexts/ThemeContext';
 import PropTypes from 'prop-types';
+import posthog from 'posthog-js';
 
 const scTheme = { colors };
 
@@ -45,5 +46,9 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
   return { pageProps };
 };
+
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+});
 
 export default wrapper.withRedux(MyApp);

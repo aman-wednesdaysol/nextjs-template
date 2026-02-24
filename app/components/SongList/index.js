@@ -30,6 +30,7 @@ const SongList = ({ songs, currentSong, isPlaying, onPlayToggle, likedTrackIds, 
               isActive={isActive}
               isPlaying={isActive && isPlaying}
               onClick={() => onPlayToggle(song)}
+              trackId={song.trackId}
             />
             <SongInfo>
               <SongTitle>{song.trackName}</SongTitle>

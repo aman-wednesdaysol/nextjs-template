@@ -1,9 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import Router from 'next/router';
 import { loginUser, signupUser } from '@services/authApi';
-import { setStoredToken } from '@utils/authStorage';
+import { setStoredToken, setuid } from '@utils/authStorage';
 import { setAuthHeader } from '@utils/apiUtils';
 import { authTypes, authCreators } from './reducer';
+import { identifyUser } from '@lib/analytics';
 
 const { successAuth, failureAuth } = authCreators;
 
@@ -11,6 +12,7 @@ const persistToken = (data) => {
   if (data && data.accessToken) {
     setStoredToken(data.accessToken);
     setAuthHeader('music', data.accessToken);
+    setuid(data.user.id);
   }
 };
 
@@ -20,6 +22,7 @@ export function* handleLogin(action) {
   if (response.ok) {
     yield put(successAuth(response.data));
     persistToken(response.data);
+    identifyUser(response.data.user.id, response.data.user.email);
     Router.push('/');
   } else {
     yield put(failureAuth(response.data));

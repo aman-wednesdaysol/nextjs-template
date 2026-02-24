@@ -12,3 +12,8 @@ export const SCREEN_BREAK_POINTS = {
   tablet: 768,
   desktop: 992
 };
+
+export const TOKEN_KEY = 'musica_access_token';
+export const UID_KEY = 'uid';
+export const PREV_TRACK_ID = 'prev_track_id';
+export const CURRENT_TRACK_ID = 'current_track_id';

@@ -28,9 +28,9 @@ module.exports = withTM(
     trailingSlash: true,
     async rewrites() {
       return [
-        { source: '/music/:path*', destination: 'http://localhost:9000/music/:path*' },
-        { source: '/login', destination: 'http://localhost:9000/login' },
-        { source: '/signup', destination: 'http://localhost:9000/signup' }
+        { source: '/music/:path*', destination: 'https://musica.up.railway.app/music/:path*' },
+        { source: '/login', destination: 'https://musica.up.railway.app/login' },
+        { source: '/signup', destination: 'https://musica.up.railway.app/signup' }
       ];
     },
     webpack(config) {

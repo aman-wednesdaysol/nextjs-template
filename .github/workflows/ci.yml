@@ -22,7 +22,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn
+        run: yarn --frozen-lockfile --network-timeout 300000        
 
       - name: Lint
         run: yarn lint

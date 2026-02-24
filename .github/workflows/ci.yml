@@ -33,18 +33,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           threshold: 80
           package-manager: yarn
-
-      - name: Build
-        run: yarn build:dev
-        env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_POSTHOG_KEY: ${{ secrets.NEXT_PUBLIC_POSTHOG_KEY }}
-          NEXT_PUBLIC_POSTHOG_HOST: ${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
-      - name: Debug dependencies
-        run: |
-          echo "=== package.json dependencies ==="
-          cat package.json | grep posthog
-          echo "=== checking node_modules ==="
-          ls node_modules | grep posthog || echo "posthog NOT found in node_modules"
-          echo "=== yarn.lock check ==="
-          grep posthog yarn.lock || echo "posthog NOT found in yarn.lock"

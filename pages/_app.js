@@ -8,7 +8,6 @@ import { translationMessages, DEFAULT_LOCALE } from '@app/i18n';
 import { wrapper } from '@app/configureStore';
 import { getStoredToken } from '@utils/authStorage';
 import { setAuthHeader } from '@utils/apiUtils';
-import { ThemeProvider } from '@app/contexts/ThemeContext';
 import PropTypes from 'prop-types';
 
 const scTheme = { colors };

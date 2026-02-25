@@ -12,7 +12,7 @@ export const { Types: authTypes, Creators: authCreators } = createActions({
   requestLogin: ['email', 'password'],
   successAuth: [PAYLOAD.DATA],
   failureAuth: [PAYLOAD.ERROR],
-  requestSignup: ['name', 'email', 'password'],
+  requestSignup: ['email', 'password'],
   clearAuth: null
 });
 

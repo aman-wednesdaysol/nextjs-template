@@ -7,8 +7,10 @@ import { authTypes, authCreators } from './reducer';
 
 const { successAuth, failureAuth } = authCreators;
 
+const isUserVerified = (data) => data?.user?.userMetadata?.emailVerified === true;
+
 const persistToken = (data) => {
-  if (data && data.accessToken) {
+  if (data?.accessToken) {
     setStoredToken(data.accessToken);
     setAuthHeader('music', data.accessToken);
   }
@@ -27,12 +29,13 @@ export function* handleLogin(action) {
 }
 
 export function* handleSignup(action) {
-  const { name, email, password } = action;
-  const response = yield call(signupUser, { name, email, password });
+  const { email, password } = action;
+  const response = yield call(signupUser, { email, password });
   if (response.ok) {
     yield put(successAuth(response.data));
-    persistToken(response.data);
-    Router.push('/');
+    if (!isUserVerified(response.data)) {
+      Router.push('/verify-email');
+    }
   } else {
     yield put(failureAuth(response.data));
   }

@@ -16,18 +16,14 @@ describe('<SignupForm />', () => {
     expect(baseElement).toMatchSnapshot()
   })
 
-  it('should render name, email, and password inputs', () => {
+  it('should render email and password inputs', () => {
     const { getByTestId } = renderProvider(<SignupForm {...defaultProps} />)
-    expect(getByTestId('signup-name')).toBeTruthy()
     expect(getByTestId('signup-email')).toBeTruthy()
     expect(getByTestId('signup-password')).toBeTruthy()
   })
 
-  it('should call onSubmit with name, email, and password', () => {
+  it('should call onSubmit with email and password', () => {
     const { getByTestId } = renderProvider(<SignupForm {...defaultProps} />)
-    fireEvent.change(getByTestId('signup-name'), {
-      target: { value: 'Test User' }
-    })
     fireEvent.change(getByTestId('signup-email'), {
       target: { value: 'test@test.com' }
     })
@@ -35,11 +31,7 @@ describe('<SignupForm />', () => {
       target: { value: 'pass123' }
     })
     fireEvent.click(getByTestId('signup-submit'))
-    expect(mockSubmit).toHaveBeenCalledWith(
-      'Test User',
-      'test@test.com',
-      'pass123'
-    )
+    expect(mockSubmit).toHaveBeenCalledWith('test@test.com', 'pass123')
   })
 
   it('should display error message when error prop is set', () => {

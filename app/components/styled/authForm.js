@@ -1,17 +1,5 @@
 import styled from '@emotion/styled';
-
-const C = {
-  bg: '#161622',
-  inputBg: '#1e1e30',
-  border: '#2d2d44',
-  accent: '#ff6b35',
-  pink: '#e84393',
-  text: '#ffffff',
-  muted: '#6c7086',
-  label: '#9ca0b0',
-  placeholder: '#4a4a5a',
-  error: '#ff4757'
-};
+import { C } from '@app/themes/colors';
 
 export const FormCard = styled.div`
   width: 100%;

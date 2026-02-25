@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { C } from './colors';
+import { C } from '@app/themes/colors';
 
 export const FormCard = styled.div`
   width: 100%;

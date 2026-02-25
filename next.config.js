@@ -28,9 +28,9 @@ module.exports = withTM(
     trailingSlash: true,
     async rewrites() {
       return [
-        { source: '/music/:path*', destination: 'http://localhost:9000/music/:path*' },
-        { source: '/login', destination: 'http://localhost:9000/login' },
-        { source: '/signup', destination: 'http://localhost:9000/signup' }
+        { source: '/music/:path*', destination: `${process.env.NEXT_PUBLIC_URL}/music/:path*` },
+        { source: '/login', destination: `${process.env.NEXT_PUBLIC_URL}/login` },
+        { source: '/signup', destination: `${process.env.NEXT_PUBLIC_URL}/signup` }
       ];
     },
     webpack(config) {

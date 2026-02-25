@@ -17,6 +17,7 @@ const usePlayToggle = ({ currentSong, dispatchSetSong }) => {
         dispatchSetSong(song);
       }
     },
+
     [currentSong, dispatchSetSong]
   );
 

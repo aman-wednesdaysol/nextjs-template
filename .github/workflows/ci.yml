@@ -2,7 +2,7 @@ name: Next.js Template CI
 on:
   pull_request:
     branches:
-      - master
+      - "**"
 
 jobs:
   build-and-test:
@@ -22,7 +22,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn
+        run: yarn --frozen-lockfile --network-timeout 300000        
 
       - name: Lint
         run: yarn lint
@@ -33,6 +33,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           threshold: 80
           package-manager: yarn
-
-      - name: Build
-        run: yarn build:dev

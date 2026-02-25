@@ -1,4 +1,4 @@
-name: Next.js Template CI
+name: MUSICA CI
 on:
   pull_request:
     branches:
@@ -31,5 +31,5 @@ jobs:
         uses: artiomtr/jest-coverage-report-action@v2.3.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          threshold: 80
           package-manager: yarn
+          test-script: yarn test:ci

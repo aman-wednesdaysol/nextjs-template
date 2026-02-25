@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { C } from './colors';
-export { ProgressSlider, VolumeGroup, VolumeSlider } from './playerSliders';
+export { ProgressSlider, VolumeGroup, VolumeSlider, ProgressRow, TimeLabel } from './playerSliders';
 
 export const PlayerContainer = styled.div`
   position: fixed;
@@ -71,16 +71,26 @@ export const TrackArtist = styled.span`
   color: ${C.muted};
 `;
 
+export const CenterSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 0.25rem;
+  min-width: 0;
+  @media (max-width: 480px) {
+    flex: 0 0 100%;
+    order: 5;
+  }
+`;
+
 export const PlayerControls = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex: 1;
   justify-content: center;
   @media (max-width: 480px) {
     gap: 0.25rem;
-    flex: 0 0 100%;
-    order: 5;
   }
 `;
 

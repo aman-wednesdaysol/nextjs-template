@@ -1,8 +1,6 @@
-name: Playwright Tests
+name: Playwright MUSICA
 on:
   push:
-    branches: "**" 
-  pull_request:
     branches: "**"
 jobs:
   test:
@@ -18,7 +16,9 @@ jobs:
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
     - name: Run Playwright tests
-      run: yarn playwright test
+      run: yarn test:playwright
+      env:
+        NEXT_PUBLIC_URL: http://localhost:9000
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

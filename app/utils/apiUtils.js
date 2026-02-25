@@ -17,7 +17,7 @@ export const generateApiClient = (type = 'github') => {
   }
   switch (type) {
     case 'auth':
-      apiClients[type] = createApiClientWithTransForm(process.env.NEXT_PUBLIC_URL);
+      apiClients[type] = createApiClientWithTransForm('');
       return apiClients[type];
     case 'music':
       apiClients[type] = createApiClientWithTransForm('', { skipRequestTransform: true });

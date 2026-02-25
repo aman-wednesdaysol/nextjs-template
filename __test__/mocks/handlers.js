@@ -6,18 +6,29 @@ const json = (data, status = 200) => ({
   body: JSON.stringify(data)
 });
 
-const API = process.env.NEXT_PUBLIC_URL;
-
-export const mockLoginSuccess = (page) => page.route(`${API}/login`, (route) => route.fulfill(json(API_LOGIN_SUCCESS)));
+export const mockLoginSuccess = (page) =>
+  page.route(
+    (url) => url.pathname === '/login',
+    (route) => route.fulfill(json(API_LOGIN_SUCCESS))
+  );
 
 export const mockLoginFailure = (page) =>
-  page.route(`${API}/login`, (route) => route.fulfill(json(API_LOGIN_FAILURE, 401)));
+  page.route(
+    (url) => url.pathname === '/login',
+    (route) => route.fulfill(json(API_LOGIN_FAILURE, 401))
+  );
 
 export const mockSignupSuccess = (page) =>
-  page.route(`${API}/signup`, (route) => route.fulfill(json(API_SIGNUP_SUCCESS)));
+  page.route(
+    (url) => url.pathname === '/signup',
+    (route) => route.fulfill(json(API_SIGNUP_SUCCESS))
+  );
 
 export const mockSignupFailure = (page) =>
-  page.route(`${API}/signup`, (route) => route.fulfill(json(API_SIGNUP_FAILURE, 400)));
+  page.route(
+    (url) => url.pathname === '/signup',
+    (route) => route.fulfill(json(API_SIGNUP_FAILURE, 400))
+  );
 
 export const mockSearchSongs = (page, songs = API_SONGS) =>
   page.route(

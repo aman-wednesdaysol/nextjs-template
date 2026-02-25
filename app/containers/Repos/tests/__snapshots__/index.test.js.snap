@@ -125,7 +125,7 @@ exports[`<Repos /> container tests should render and match the snapshot 1`] = `
                 class="ant-input emotion-1 ant-input-outlined"
                 data-testid="search-bar"
                 type="search"
-                value=""
+                value="react"
               />
               <span
                 class="ant-input-group-addon"

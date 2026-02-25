@@ -16,10 +16,19 @@ import {
   TrackArtist,
   PlayerControls,
   ControlButton,
+  CenterSection,
   ProgressSlider,
+  ProgressRow,
+  TimeLabel,
   VolumeGroup,
   VolumeSlider
 } from '@components/styled/playerBar';
+
+const formatTime = (secs) => {
+  const s = Math.floor(secs || 0);
+  const m = Math.floor(s / 60);
+  return `${m}:${String(s % 60).padStart(2, '0')}`;
+};
 
 const progressFill = (time, dur) => `${dur ? (time / dur) * 100 : 0}%`;
 
@@ -43,26 +52,32 @@ const AudioPlayer = ({ currentSong, onNext, onPrev, onPlayStateChange, onRegiste
         <TrackTitle>{currentSong.trackName}</TrackTitle>
         <TrackArtist>{currentSong.artistName}</TrackArtist>
       </PlayerTrackInfo>
-      <PlayerControls>
-        <ControlButton data-testid="prev-btn" onClick={onPrev}>
-          <StepBackwardFilled />
-        </ControlButton>
-        <ControlButton data-testid="play-btn" primary onClick={player.togglePlay}>
-          {player.isPlaying ? <PauseCircleFilled /> : <PlayCircleFilled />}
-        </ControlButton>
-        <ControlButton data-testid="next-btn" onClick={onNext}>
-          <StepForwardFilled />
-        </ControlButton>
-      </PlayerControls>
-      <ProgressSlider
-        data-testid="progress-slider"
-        type="range"
-        min={0}
-        max={player.duration || 0}
-        value={player.currentTime}
-        onChange={(e) => player.seek(Number(e.target.value))}
-        style={{ '--fill': progressFill(player.currentTime, player.duration) }}
-      />
+      <CenterSection>
+        <PlayerControls>
+          <ControlButton data-testid="prev-btn" onClick={onPrev}>
+            <StepBackwardFilled />
+          </ControlButton>
+          <ControlButton data-testid="play-btn" primary onClick={player.togglePlay}>
+            {player.isPlaying ? <PauseCircleFilled /> : <PlayCircleFilled />}
+          </ControlButton>
+          <ControlButton data-testid="next-btn" onClick={onNext}>
+            <StepForwardFilled />
+          </ControlButton>
+        </PlayerControls>
+        <ProgressRow>
+          <TimeLabel align="right">{formatTime(player.currentTime)}</TimeLabel>
+          <ProgressSlider
+            data-testid="progress-slider"
+            type="range"
+            min={0}
+            max={player.duration || 0}
+            value={player.currentTime}
+            onChange={(e) => player.seek(Number(e.target.value))}
+            style={{ '--fill': progressFill(player.currentTime, player.duration) }}
+          />
+          <TimeLabel>{formatTime(player.duration)}</TimeLabel>
+        </ProgressRow>
+      </CenterSection>
       <VolumeGroup onClick={player.toggleMute} data-testid="volume-toggle">
         <SoundFilled
           data-testid="volume-icon"

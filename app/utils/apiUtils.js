@@ -5,7 +5,9 @@ import { mapKeysDeep } from './index';
 
 const apiClients = {
   github: null,
-  default: null
+  default: null,
+  auth: null,
+  music: null
 };
 
 export const getApiClient = (type = 'github') => apiClients[type];
@@ -13,6 +15,12 @@ export const generateApiClient = (type = 'github') => {
   switch (type) {
     case 'github':
       apiClients[type] = createApiClientWithTransForm(process.env.NEXT_PUBLIC_GITHUB_URL);
+      return apiClients[type];
+    case 'auth':
+      apiClients[type] = createApiClientWithTransForm(process.env.NEXT_PUBLIC_GITHUB_URL);
+      return apiClients[type];
+    case 'music':
+      apiClients[type] = createApiClientWithTransForm('http://localhost:9000');
       return apiClients[type];
     default:
       apiClients.default = createApiClientWithTransForm(process.env.NEXT_PUBLIC_GITHUB_URL);
@@ -41,4 +49,11 @@ export const createApiClientWithTransForm = (baseURL) => {
     return request;
   });
   return api;
+};
+
+export const setAuthHeader = (type, token) => {
+  const client = apiClients[type];
+  if (client) {
+    client.setHeader('Authorization', `Bearer ${token}`);
+  }
 };

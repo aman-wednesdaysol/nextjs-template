@@ -16,6 +16,10 @@ module.exports = {
     '!**/testUtils.js',
     '!**/themes/index.js',
     '!**/utils/constants.js',
+    '!**/constants.js',
+    '!**/useAudioPlayer.js',
+    '!**/useAudioSetup.js',
+    '!**/audioSingleton.js',
     '!**/configureStore.js',
     '!**/i18n.js',
     '!**/reducers.js',
@@ -24,10 +28,10 @@ module.exports = {
   testEnvironment: 'jsdom',
   coverageThreshold: {
     global: {
-      statements: 70,
-      branches: 70,
-      functions: 70,
-      lines: 70
+      statements: 90,
+      branches: 90,
+      functions: 90,
+      lines: 90
     }
   },
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],

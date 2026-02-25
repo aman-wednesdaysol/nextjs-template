@@ -6,7 +6,7 @@ const json = (data, status = 200) => ({
   body: JSON.stringify(data)
 });
 
-const API = process.env.NEXT_PUBLIC_URL;
+const API = process.env.NEXT_PUBLIC_URL || 'http://localhost:9000';
 
 export const mockLoginSuccess = (page) => page.route(`${API}/login`, (route) => route.fulfill(json(API_LOGIN_SUCCESS)));
 

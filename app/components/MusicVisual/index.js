@@ -6,35 +6,46 @@ import {
   EqualizerBar,
   FloatingNote,
   BrandText,
-  TaglineText
+  TaglineText,
+  TopSection,
+  MiddleSection,
+  BottomSection
 } from '@components/styled/musicVisual';
 import { EQUALIZER_BARS, FLOATING_NOTES, GLOW_RINGS } from './constants';
 
 const MusicVisual = () => (
   <>
-    <BrandText>MUSICA</BrandText>
-    <TaglineText>FEEL THE RHYTHM</TaglineText>
-    {GLOW_RINGS.map((ring) => (
-      <GlowRing key={ring.size} size={ring.size} duration={ring.duration} delay={ring.delay} />
-    ))}
-    <VinylRecord data-testid="vinyl-record" />
-    <EqualizerWrapper>
-      {EQUALIZER_BARS.map((bar, i) => (
-        <EqualizerBar key={i} duration={bar.duration} delay={bar.delay} />
+    <TopSection>
+      <BrandText>MUSICA</BrandText>
+      <TaglineText>FEEL THE RHYTHM</TaglineText>
+    </TopSection>
+
+    <MiddleSection>
+      {GLOW_RINGS.map((ring) => (
+        <GlowRing key={ring.size} size={ring.size} duration={ring.duration} delay={ring.delay} />
       ))}
-    </EqualizerWrapper>
-    {FLOATING_NOTES.map((note, i) => (
-      <FloatingNote
-        key={i}
-        size={note.size}
-        duration={note.duration}
-        delay={note.delay}
-        left={note.left}
-        bottom={note.bottom}
-      >
-        {note.note}
-      </FloatingNote>
-    ))}
+      <VinylRecord data-testid="vinyl-record" />
+    </MiddleSection>
+
+    <BottomSection>
+      <EqualizerWrapper>
+        {EQUALIZER_BARS.map((bar, i) => (
+          <EqualizerBar key={i} duration={bar.duration} delay={bar.delay} />
+        ))}
+      </EqualizerWrapper>
+      {FLOATING_NOTES.map((note, i) => (
+        <FloatingNote
+          key={i}
+          size={note.size}
+          duration={note.duration}
+          delay={note.delay}
+          left={note.left}
+          bottom={note.bottom}
+        >
+          {note.note}
+        </FloatingNote>
+      ))}
+    </BottomSection>
   </>
 );
 

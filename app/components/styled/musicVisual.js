@@ -13,10 +13,10 @@ const pulse = keyframes`
 `;
 
 const equalize = keyframes`
-  0%, 100% { height: 15%; }
-  25% { height: 55%; }
-  50% { height: 85%; }
-  75% { height: 35%; }
+  0%, 100% { height: 20%; }
+  25% { height: 72%; }
+  50% { height: 100%; }
+  75% { height: 46%; }
 `;
 
 const floatUp = keyframes`
@@ -74,21 +74,54 @@ export const GlowRing = styled.div`
   animation-delay: ${(props) => props.delay}s;
 `;
 
+export const TopSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  padding-bottom: 1rem;
+  z-index: 3;
+`;
+
+export const MiddleSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: 1.5;
+  z-index: 2;
+`;
+
+export const BottomSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  flex: 1;
+  padding-top: 1rem;
+  z-index: 1;
+  width: 100%;
+`;
+
 export const EqualizerWrapper = styled.div`
   display: flex;
   align-items: flex-end;
-  gap: 5px;
-  height: 100px;
-  position: absolute;
-  bottom: 70px;
+  justify-content: center;
+  gap: 4px;
+  height: 156px;
+  width: 90%;
   z-index: 1;
 `;
 
 export const EqualizerBar = styled.div`
-  width: 4px;
+  width: 5px;
+  flex: 1;
+  max-width: 8px;
   height: 15%;
   background: linear-gradient(to top, #ff6b35, #e84393);
-  border-radius: 2px;
+  border-radius: 3px;
   animation: ${equalize} ${(props) => props.duration}s ease-in-out infinite;
   animation-delay: ${(props) => props.delay}s;
   opacity: 0.6;

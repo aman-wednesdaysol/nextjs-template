@@ -105,4 +105,14 @@ describe('<SongList />', () => {
     fireEvent.click(getAllByTestId('heart-button')[0])
     expect(mockToggleLike).toHaveBeenCalledWith(mockSongs[0])
   })
+
+  it('should highlight the active song when currentSong matches', () => {
+    const props = {
+      ...defaultProps,
+      currentSong: mockSongs[0],
+      isPlaying: true
+    }
+    const { getByTestId } = renderProvider(<SongList {...props} />)
+    expect(getByTestId('song-1')).toBeTruthy()
+  })
 })

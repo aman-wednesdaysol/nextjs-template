@@ -1,6 +1,7 @@
 import React from 'react'
 import { renderProvider } from '@utils/testUtils'
 import { TrackDetailTest as TrackDetail } from '../index'
+import { fireEvent } from '@testing-library/react'
 
 const mockBack = jest.fn()
 jest.mock('next/router', () => ({
@@ -15,11 +16,13 @@ jest.mock('@components/AudioPlayer', () => {
 
 jest.mock('@components/TrackInfo', () => {
   const PT = require('prop-types')
-  const Mock = ({ track }) => (
-    <div data-testid='track-info'>{track.trackName}</div>
+  const Mock = ({ track, onPlay }) => (
+    <div data-testid='track-info' onClick={onPlay}>
+      {track.trackName}
+    </div>
   )
   Mock.displayName = 'MockTrackInfo'
-  Mock.propTypes = { track: PT.object }
+  Mock.propTypes = { track: PT.object, onPlay: PT.func }
   return Mock
 })
 
@@ -78,5 +81,24 @@ describe('<TrackDetail /> container', () => {
   it('should render page title', () => {
     const { getByText } = renderProvider(<TrackDetail {...defaultProps} />)
     expect(getByText('MUSICA')).toBeTruthy()
+  })
+
+  it('should call router.back when back button is clicked', () => {
+    const { getByTestId } = renderProvider(<TrackDetail {...defaultProps} />)
+    fireEvent.click(getByTestId('back-button'))
+    expect(mockBack).toHaveBeenCalled()
+  })
+
+  it('should dispatch setSong when handlePlay is called with trackData', () => {
+    const props = { ...defaultProps, trackData: mockTrack }
+    const { getByTestId } = renderProvider(<TrackDetail {...props} />)
+    fireEvent.click(getByTestId('track-info'))
+    expect(mockSetSong).toHaveBeenCalledWith(mockTrack)
+  })
+
+  it('should not dispatch setSong when handlePlay is called without trackData', () => {
+    const props = { ...defaultProps, trackData: null }
+    renderProvider(<TrackDetail {...props} />)
+    expect(mockSetSong).not.toHaveBeenCalled()
   })
 })

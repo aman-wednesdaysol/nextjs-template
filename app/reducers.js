@@ -10,6 +10,7 @@ import info from './containers/Info/reducer';
 import auth from './containers/Auth/reducer';
 import music from './containers/Music/reducer';
 import library from './containers/Library/reducer';
+import trackDetail from './containers/TrackDetail/reducer';
 
 enableAllPlugins();
 
@@ -23,7 +24,8 @@ export default function createReducer(injectedReducer = {}) {
     info,
     auth,
     music,
-    library
+    library,
+    trackDetail
   });
 
   return rootReducer;

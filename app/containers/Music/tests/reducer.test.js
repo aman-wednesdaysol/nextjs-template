@@ -49,13 +49,23 @@ describe('Music reducer tests', () => {
     ).toEqual(expected)
   })
 
-  it('should set currentSong on SET_CURRENT_SONG', () => {
+  it('should set currentSong and isPlaying on SET_CURRENT_SONG', () => {
     const song = { trackId: 1, trackName: 'Song' }
-    const expected = { ...state, currentSong: song }
+    const expected = { ...state, currentSong: song, isPlaying: true }
     expect(
       musicReducer(state, {
         type: musicTypes.SET_CURRENT_SONG,
         [MUSIC_PAYLOAD.CURRENT_SONG]: song
+      })
+    ).toEqual(expected)
+  })
+
+  it('should set isPlaying on SET_IS_PLAYING', () => {
+    const expected = { ...state, isPlaying: true }
+    expect(
+      musicReducer(state, {
+        type: musicTypes.SET_IS_PLAYING,
+        [MUSIC_PAYLOAD.IS_PLAYING]: true
       })
     ).toEqual(expected)
   })

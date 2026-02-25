@@ -1,9 +1,14 @@
 import { renderHook, act } from '@testing-library/react'
-import { useAudioPlayer } from '../useAudioPlayer'
 
 const mockPlay = jest.fn().mockResolvedValue(undefined)
 const mockPause = jest.fn()
 let mockAudioInstance
+
+jest.mock('../audioSingleton', () => ({
+  getAudioInstance: () => mockAudioInstance
+}))
+
+const { useAudioPlayer } = require('../useAudioPlayer')
 
 beforeEach(() => {
   mockPlay.mockClear()
@@ -15,14 +20,10 @@ beforeEach(() => {
     currentTime: 0,
     duration: 0,
     src: '',
+    paused: true,
     addEventListener: jest.fn(),
     removeEventListener: jest.fn()
   }
-  jest.spyOn(global, 'Audio').mockImplementation(() => mockAudioInstance)
-})
-
-afterEach(() => {
-  global.Audio.mockRestore()
 })
 
 describe('useAudioPlayer', () => {
@@ -36,14 +37,28 @@ describe('useAudioPlayer', () => {
     expect(result.current.duration).toBe(0)
   })
 
-  it('should play when a song is provided', () => {
-    renderHook(() => useAudioPlayer(song, jest.fn()))
+  it('should play when a new song is selected', () => {
+    const { rerender } = renderHook(({ s }) => useAudioPlayer(s, jest.fn()), {
+      initialProps: { s: null }
+    })
+    rerender({ s: song })
     expect(mockAudioInstance.src).toBe(song.previewUrl)
     expect(mockPlay).toHaveBeenCalled()
   })
 
+  it('should not auto-play on remount with same song', () => {
+    renderHook(() => useAudioPlayer(song, jest.fn()))
+    expect(mockPlay).not.toHaveBeenCalled()
+  })
+
   it('should toggle play/pause', () => {
-    const { result } = renderHook(() => useAudioPlayer(song, jest.fn()))
+    const { result, rerender } = renderHook(
+      ({ s }) => useAudioPlayer(s, jest.fn()),
+      {
+        initialProps: { s: null }
+      }
+    )
+    rerender({ s: song })
     act(() => {
       result.current.togglePlay()
     })

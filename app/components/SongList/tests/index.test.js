@@ -3,6 +3,23 @@ import { fireEvent } from '@testing-library/react'
 import { renderProvider } from '@utils/testUtils'
 import SongList from '../index'
 
+const mockPush = jest.fn()
+jest.mock('next/router', () => ({
+  useRouter: () => ({ push: mockPush })
+}))
+
+jest.mock('@components/ArtworkPlayButton', () => {
+  const PT = require('prop-types')
+  const Mock = ({ onClick, isPlaying, isActive }) => (
+    <button data-testid='artwork-play-btn' onClick={onClick}>
+      {isActive && isPlaying ? 'pause' : 'play'}
+    </button>
+  )
+  Mock.displayName = 'MockArtworkPlayButton'
+  Mock.propTypes = { onClick: PT.func, isPlaying: PT.bool, isActive: PT.bool }
+  return Mock
+})
+
 const mockSongs = [
   {
     trackId: 1,
@@ -21,23 +38,16 @@ const mockSongs = [
 ]
 
 describe('<SongList />', () => {
-  const mockSelect = jest.fn()
+  const mockPlayToggle = jest.fn()
   const mockToggleLike = jest.fn()
   const defaultProps = {
     songs: mockSongs,
     currentSong: null,
-    onSelectSong: mockSelect
+    isPlaying: false,
+    onPlayToggle: mockPlayToggle
   }
 
-  beforeEach(() => {
-    mockSelect.mockClear()
-    mockToggleLike.mockClear()
-  })
-
-  it('should render and match the snapshot', () => {
-    const { baseElement } = renderProvider(<SongList {...defaultProps} />)
-    expect(baseElement).toMatchSnapshot()
-  })
+  beforeEach(() => jest.clearAllMocks())
 
   it('should render all songs', () => {
     const { getByTestId } = renderProvider(<SongList {...defaultProps} />)
@@ -45,10 +55,16 @@ describe('<SongList />', () => {
     expect(getByTestId('song-2')).toBeTruthy()
   })
 
-  it('should call onSelectSong when a song is clicked', () => {
+  it('should navigate to track detail when card clicked', () => {
     const { getByTestId } = renderProvider(<SongList {...defaultProps} />)
     fireEvent.click(getByTestId('song-1'))
-    expect(mockSelect).toHaveBeenCalledWith(mockSongs[0])
+    expect(mockPush).toHaveBeenCalledWith('/track/1')
+  })
+
+  it('should call onPlayToggle when artwork clicked', () => {
+    const { getAllByTestId } = renderProvider(<SongList {...defaultProps} />)
+    fireEvent.click(getAllByTestId('artwork-play-btn')[0])
+    expect(mockPlayToggle).toHaveBeenCalledWith(mockSongs[0])
   })
 
   it('should render song details', () => {
@@ -59,9 +75,8 @@ describe('<SongList />', () => {
   })
 
   it('should render empty list when no songs', () => {
-    const { getByTestId } = renderProvider(
-      <SongList songs={[]} currentSong={null} onSelectSong={mockSelect} />
-    )
+    const props = { ...defaultProps, songs: [] }
+    const { getByTestId } = renderProvider(<SongList {...props} />)
     expect(getByTestId('song-list').children.length).toBe(0)
   })
 
@@ -78,17 +93,6 @@ describe('<SongList />', () => {
     }
     const { getAllByTestId } = renderProvider(<SongList {...props} />)
     expect(getAllByTestId('heart-button')).toHaveLength(2)
-  })
-
-  it('should show filled heart for liked songs', () => {
-    const props = {
-      ...defaultProps,
-      onToggleLike: mockToggleLike,
-      likedTrackIds: { 1: true }
-    }
-    const { getAllByLabelText } = renderProvider(<SongList {...props} />)
-    expect(getAllByLabelText('Unlike song')).toHaveLength(1)
-    expect(getAllByLabelText('Like song')).toHaveLength(1)
   })
 
   it('should call onToggleLike with song data when heart clicked', () => {

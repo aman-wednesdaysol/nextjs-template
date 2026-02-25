@@ -29,9 +29,9 @@ describe('<SearchBar />', () => {
     expect(mockChange).toHaveBeenCalledWith('hello')
   })
 
-  it('should be disabled when loading', () => {
+  it('should not be disabled when loading', () => {
     const props = { ...defaultProps, loading: true }
     const { getByTestId } = renderProvider(<SearchBar {...props} />)
-    expect(getByTestId('music-search-input')).toBeDisabled()
+    expect(getByTestId('music-search-input')).not.toBeDisabled()
   })
 })

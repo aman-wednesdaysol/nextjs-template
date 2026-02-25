@@ -21,8 +21,14 @@ import {
   VolumeSlider
 } from '@components/styled/playerBar';
 
-const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
-  const player = useAudioPlayer(currentSong, onNext);
+const AudioPlayer = ({ currentSong, onNext, onPrev, onPlayStateChange, onRegisterToggle }) => {
+  const player = useAudioPlayer(currentSong, onNext, onPlayStateChange);
+
+  React.useEffect(() => {
+    if (onRegisterToggle) {
+      onRegisterToggle(player.togglePlay);
+    }
+  }, [player.togglePlay, onRegisterToggle]);
 
   if (!currentSong) {
     return null;
@@ -56,7 +62,7 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
         style={{ '--fill': `${player.duration ? (player.currentTime / player.duration) * 100 : 0}%` }}
       />
       <VolumeGroup>
-        <SoundFilled data-testid="volume-icon" style={{ color: '#ffff', fontSize: '1rem' }} />
+        <SoundFilled data-testid="volume-icon" style={{ color: '#ff6b35', fontSize: '1rem' }} />
         <VolumeSlider
           data-testid="volume-slider"
           type="range"
@@ -75,7 +81,9 @@ const AudioPlayer = ({ currentSong, onNext, onPrev }) => {
 AudioPlayer.propTypes = {
   currentSong: PropTypes.object,
   onNext: PropTypes.func.isRequired,
-  onPrev: PropTypes.func.isRequired
+  onPrev: PropTypes.func.isRequired,
+  onPlayStateChange: PropTypes.func,
+  onRegisterToggle: PropTypes.func
 };
 
 export default AudioPlayer;

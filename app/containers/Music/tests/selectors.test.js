@@ -3,7 +3,8 @@ import {
   selectMusicLoading,
   selectMusicError,
   selectCurrentSong,
-  selectSearchTerm
+  selectSearchTerm,
+  selectIsPlaying
 } from '../selectors'
 
 describe('Music selector tests', () => {
@@ -16,7 +17,8 @@ describe('Music selector tests', () => {
         loading: true,
         error: 'Some error',
         currentSong: { trackId: 1 },
-        searchTerm: 'test'
+        searchTerm: 'test',
+        isPlaying: true
       }
     }
   })
@@ -41,6 +43,10 @@ describe('Music selector tests', () => {
     expect(selectSearchTerm()(mockedState)).toBe('test')
   })
 
+  it('should select isPlaying', () => {
+    expect(selectIsPlaying()(mockedState)).toBe(true)
+  })
+
   it('should return defaults when music state is empty', () => {
     const empty = {}
     expect(selectMusicSongs()(empty)).toEqual([])
@@ -48,5 +54,6 @@ describe('Music selector tests', () => {
     expect(selectMusicError()(empty)).toBeNull()
     expect(selectCurrentSong()(empty)).toBeNull()
     expect(selectSearchTerm()(empty)).toBe('')
+    expect(selectIsPlaying()(empty)).toBe(false)
   })
 })

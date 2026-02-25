@@ -17,6 +17,8 @@ const globalStyle = css`
   }
 
   body {
+    padding: 0;
+    margin: 0;
     p,
     label,
     span,

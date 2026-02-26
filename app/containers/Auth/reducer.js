@@ -13,6 +13,7 @@ export const { Types: authTypes, Creators: authCreators } = createActions({
   successAuth: [PAYLOAD.DATA],
   failureAuth: [PAYLOAD.ERROR],
   requestSignup: ['email', 'password'],
+  requestGoogleLogin: null,
   clearAuth: null
 });
 
@@ -34,6 +35,7 @@ const handleFailure = (draft, action) => {
 const handlers = {
   [authTypes.REQUEST_LOGIN]: handleRequest,
   [authTypes.REQUEST_SIGNUP]: handleRequest,
+  [authTypes.REQUEST_GOOGLE_LOGIN]: handleRequest,
   [authTypes.SUCCESS_AUTH]: handleSuccess,
   [authTypes.FAILURE_AUTH]: handleFailure,
   [authTypes.CLEAR_AUTH]: () => initialState

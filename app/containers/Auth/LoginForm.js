@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import posthog from 'posthog-js';
+import { GoogleOutlined } from '@ant-design/icons';
 import {
   FormCard,
   FormTitle,
@@ -11,16 +13,42 @@ import {
   SubmitButton,
   SwitchText,
   SwitchLink,
-  ErrorMessage
+  ErrorMessage,
+  GoogleButton,
+  Separator
 } from '@components/styled/authForm';
 
-const LoginForm = ({ onSubmit, loading, error }) => {
+const LoginForm = ({ onSubmit, onGoogleSubmit, loading, error }) => {
+  const [googleLoginVariant, setGoogleLoginVariant] = useState(null);
+
+  useEffect(() => {
+    setGoogleLoginVariant(posthog.getFeatureFlag('google-login'));
+  }, []);
+
+  useEffect(() => {
+    if (googleLoginVariant) {
+      posthog.capture('$feature_flag_called', {
+        $feature_flag: 'google-login',
+        $feature_flag_response: googleLoginVariant
+      });
+    }
+  }, [googleLoginVariant]);
+
+  const isGoogleLoginEnabled = googleLoginVariant === 'test';
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(email, password);
+  };
+
+  const handleGoogleClick = () => {
+    posthog.capture('google_signin_clicked', {
+      variant: googleLoginVariant
+    });
+    onGoogleSubmit();
   };
 
   return (
@@ -57,6 +85,14 @@ const LoginForm = ({ onSubmit, loading, error }) => {
           {loading ? 'Signing in...' : 'Sign In'}
         </SubmitButton>
       </form>
+      {isGoogleLoginEnabled && (
+        <>
+          <Separator>OR</Separator>
+          <GoogleButton onClick={handleGoogleClick} data-testid="google-login-button">
+            <GoogleOutlined /> Sign in with Google
+          </GoogleButton>
+        </>
+      )}
       <SwitchText>
         Don&apos;t have an account?{' '}
         <Link href="/signup" passHref legacyBehavior>
@@ -69,6 +105,7 @@ const LoginForm = ({ onSubmit, loading, error }) => {
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onGoogleSubmit: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.string
 };

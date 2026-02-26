@@ -116,3 +116,52 @@ export const ErrorMessage = styled.p`
   margin-top: 0.5rem;
   text-align: center;
 `;
+
+export const GoogleButton = styled.button`
+  width: 100%;
+  padding: 0.9rem;
+  background: white;
+  border: 1px solid ${C.border};
+  border-radius: 10px;
+  color: #000;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  &:hover {
+    background: #f8f9fa;
+    border-color: ${C.muted};
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+export const Separator = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: ${C.muted};
+  font-size: 0.85rem;
+  font-family: 'Outfit', sans-serif;
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: ${C.border};
+  }
+  &::before {
+    margin-right: 1rem;
+  }
+  &::after {
+    margin-left: 1rem;
+  }
+`;

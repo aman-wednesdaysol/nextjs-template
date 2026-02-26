@@ -38,7 +38,26 @@ export function* handleSignup(action) {
   }
 }
 
+export function* handleGoogleLogin() {
+  // Mock Google Login for now
+  const response = {
+    ok: true,
+    data: {
+      accessToken: 'mock-google-token',
+      user: { email: 'google-user@example.com', name: 'Google User' }
+    }
+  };
+  if (response.ok) {
+    yield put(successAuth(response.data));
+    persistToken(response.data);
+    Router.push('/');
+  } else {
+    yield put(failureAuth(response.data));
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(authTypes.REQUEST_LOGIN, handleLogin);
   yield takeLatest(authTypes.REQUEST_SIGNUP, handleSignup);
+  yield takeLatest(authTypes.REQUEST_GOOGLE_LOGIN, handleGoogleLogin);
 }

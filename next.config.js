@@ -27,11 +27,7 @@ module.exports = withTM(
     basePath: process.env.BASE_PATH || '',
     trailingSlash: true,
     async rewrites() {
-      return [
-        { source: '/music/:path*', destination: `${process.env.NEXT_PUBLIC_URL}/music/:path*` },
-        { source: '/login', destination: `${process.env.NEXT_PUBLIC_URL}/login` },
-        { source: '/signup', destination: `${process.env.NEXT_PUBLIC_URL}/signup` }
-      ];
+      return [{ source: '/music/:path*', destination: `${process.env.NEXT_PUBLIC_URL}/music/:path*` }];
     },
     webpack(config) {
       config.resolve.alias = constructAlias(config);

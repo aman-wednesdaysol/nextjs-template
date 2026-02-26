@@ -43,7 +43,6 @@ exports[`<SignupForm /> should render and match the snapshot 1`] = `
   background: var(--musica-inputBg);
   border: 1.5px solid var(--musica-border);
   border-radius: 10px;
-  color: var(--musica-text);
   font-family: 'Outfit',sans-serif;
   font-size: 0.95rem;
   outline: none;

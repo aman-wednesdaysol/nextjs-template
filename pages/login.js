@@ -12,7 +12,7 @@ import { authCreators } from '@app/containers/Auth/reducer';
 import { selectAuthError, selectAuthLoading } from '@app/containers/Auth/selectors';
 import saga from '@app/containers/Auth/saga';
 
-export const LoginPage = ({ dispatchLogin, loading, error }) => (
+export const LoginPage = ({ dispatchLogin, dispatchGoogleLogin, loading, error }) => (
   <AuthPageWrapper>
     <VisualPanel>
       <MusicVisual />
@@ -22,13 +22,14 @@ export const LoginPage = ({ dispatchLogin, loading, error }) => (
         <ThemeToggle />
       </FormPanelToggle>
       <MobileBrand>MUSICA</MobileBrand>
-      <LoginForm onSubmit={dispatchLogin} loading={loading} error={error} />
+      <LoginForm onSubmit={dispatchLogin} onGoogleSubmit={dispatchGoogleLogin} loading={loading} error={error} />
     </FormPanel>
   </AuthPageWrapper>
 );
 
 LoginPage.propTypes = {
   dispatchLogin: PropTypes.func.isRequired,
+  dispatchGoogleLogin: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.string
 };
@@ -39,9 +40,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  const { requestLogin } = authCreators;
+  const { requestLogin, requestGoogleLogin } = authCreators;
   return {
-    dispatchLogin: (email, password) => dispatch(requestLogin(email, password))
+    dispatchLogin: (email, password) => dispatch(requestLogin(email, password)),
+    dispatchGoogleLogin: () => dispatch(requestGoogleLogin())
   };
 }
 

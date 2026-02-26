@@ -43,12 +43,17 @@ describe('Auth reducer tests', () => {
   })
 
   it('should set error when FAILURE_AUTH is dispatched', () => {
+    const error = {
+      statusCode: 500,
+      error: 'Internal Server Error',
+      message: 'An internal server error occurred'
+    }
     const expectedResult = {
       ...state,
-      [PAYLOAD.ERROR]: 'something_went_wrong',
+      [PAYLOAD.ERROR]: 'An internal server error occurred',
       loading: false
     }
-    expect(authReducer(state, { type: authTypes.FAILURE_AUTH })).toEqual(
+    expect(authReducer(state, { type: authTypes.FAILURE_AUTH, error })).toEqual(
       expectedResult
     )
   })

@@ -47,3 +47,13 @@ export const setDeviceType = (width = document.body.clientWidth) => {
 };
 
 export const getDeviceType = (device) => (device || setDeviceType()).toUpperCase();
+
+export const translateError = (error) => {
+  if (typeof error === 'string') {
+    return error;
+  }
+  if (typeof error === 'object' && error !== null) {
+    return error.message || error.error || 'something_went_wrong';
+  }
+  return 'something_went_wrong';
+};

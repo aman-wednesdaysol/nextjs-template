@@ -13,7 +13,7 @@ test.describe('Signup Page', () => {
     await expect(page.getByTestId('signup-submit')).toBeVisible();
   });
 
-  test('successful signup redirects to home', async ({ page }) => {
+  test('successful signup redirects to verify email page', async ({ page }) => {
     await mockSignupSuccess(page);
     await mockLibrary(page);
     await mockSearchSongs(page, []);
@@ -22,7 +22,8 @@ test.describe('Signup Page', () => {
     await page.getByTestId('signup-password').fill(TEST_USER.password);
     await page.getByTestId('signup-submit').click();
 
-    await page.waitForURL('**/');
+    await page.waitForURL('**/verify-email/');
+    await expect(page.getByTestId('verify-email-title')).toBeVisible();
   });
 
   test('failed signup shows error message', async ({ page }) => {

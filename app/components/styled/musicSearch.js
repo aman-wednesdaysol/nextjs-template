@@ -13,7 +13,7 @@ export const SearchInput = styled.input`
   background: ${C.inputBg};
   border: 1.5px solid ${C.border};
   border-radius: 12px;
-  color: ${C.text};
+  color: ${C.inputText};
   font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   outline: none;

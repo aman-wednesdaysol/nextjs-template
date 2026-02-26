@@ -165,3 +165,20 @@ export const Separator = styled.div`
     margin-left: 1rem;
   }
 `;
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  font-size: 4rem;
+  color: ${C.accent};
+`;
+
+export const SuccessText = styled.p`
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: ${C.text};
+  text-align: center;
+  margin-bottom: 2rem;
+`;

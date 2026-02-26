@@ -98,8 +98,8 @@ describe('Auth saga tests', () => {
         put({ type: authTypes.SUCCESS_AUTH, data: successData })
       )
       gen.next()
-      expect(setStoredToken).toHaveBeenCalledWith('abc123')
-      expect(Router.push).toHaveBeenCalledWith('/')
+      expect(setStoredToken).not.toHaveBeenCalled()
+      expect(Router.push).toHaveBeenCalledWith('/verify-email')
     })
 
     it('should not persist token when data is null', () => {

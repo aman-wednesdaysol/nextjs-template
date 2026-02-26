@@ -31,8 +31,7 @@ export function* handleSignup(action) {
   const response = yield call(signupUser, { email, password });
   if (response.ok) {
     yield put(successAuth(response.data));
-    persistToken(response.data);
-    Router.push('/');
+    Router.push('/verify-email');
   } else {
     yield put(failureAuth(response.data));
   }

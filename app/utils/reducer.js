@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import { translateError } from './index';
 
 export const PAYLOAD = {
   DATA: 'data',
@@ -18,5 +19,6 @@ export const setData = (draft, action, key = PAYLOAD.DATA, defaultValue = null) 
 };
 
 export const setError = (draft, action) => {
-  setData(draft, action, PAYLOAD.ERROR, 'something_went_wrong');
+  const error = get(action, PAYLOAD.ERROR, 'something_went_wrong');
+  draft[PAYLOAD.ERROR] = translateError(error);
 };
